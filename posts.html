@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Posts</title>
+    <style>
+         body {
+            font-family: Cambria, sans-serif;
+            margin: 0;
+            padding: 0;
+            /* display: flex; */
+        }
+         /* Style the navigation bar */
+         nav {
+            background-color: #333;
+            overflow: hidden;
+        }
+
+        /* Navigation bar links */
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Display list items in a horizontal row */
+        nav ul li {
+            float: left;
+        }
+
+        /* Style for each link */
+        nav ul li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        /* Change color on hover */
+        nav ul li a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        /* Clear floats after the columns */
+        nav:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        /* Responsive design: Stacks the links vertically on small screens */
+        @media screen and (max-width: 600px) {
+            nav ul li {
+                float: none;
+            }
+        }
+
+        .main-content {
+            width: 75%;
+            padding: 20px;
+        }
+
+        .footer {
+        background-color: #979090;
+        color: white;
+        text-align: center;
+        padding: 20px;
+        position: relative;
+        bottom: 0;
+        width: 100%;
+        }
+.post {
+    margin-bottom: 40px;
+}
+.post img {
+    max-width: 100%;
+    height: auto;
+}
+.post h3{
+    color: #792222;
+}
+.post .caption {
+    font-style: italic;
+    color: #666;
+}
+.post-date {
+    font-size: 14px;
+    color: grey;
+}
+.post name {
+    font-size: 14px;
+    color: grey;
+}
+
+</style>
+</head>
+<body>
+    <div class="main-content">
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+            <li><a href="bio.html">Bio</a></li>
+            <li><a href="posts.html">Posts</a></li> 
+            <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+         
+        <!-- Additional posts can be added here. Simply copy and paste the template below and edit accordingly. Make sure to add your photos to the 'images/' folder!-->
+     
+        <!-- <div class="post">
+            <h3>Title here</h3>
+            <p class = "post-name">Your name</p>
+            <p class="post-date">date here</p>
+            <p>first part of text</p>
+            <img src="images/img.png" alt="Image Description">
+            <p class="caption">very descriptive caption</p>
+            <p>More text here</p>
+        </div> -->
+        <div class="post">
+            <h3>Hello world!</h3>
+            <p class = "post-name">All authors</p>
+            <p class="post-date">December 22, 2023</p>
+            <p>Welcome, fellow food... er, visitors!</p>
+            <p class="post img">
+                <img src="images/hello.png" alt="Image Description">
+            </p>
+            <p class="caption">A collage of various images generated through ChatGPT and Dalle-3.</p>
+            <p>Here begins our journey. We hope you like what you read, and if not, well, we know who to tell the zombies to come to first!</p>
+        </div>
+        <div class="footer">
+            <p><p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="https://oscars47.github.io/math-zombies/">AI, Math, Zombies Oh My</a> by <span property="cc:attributionName">Gizem Karaali, Kamden Baer, Oscar Scholin</span> is licensed under <a href="http://creativecommons.org/licenses/by-nc/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;color:hsl(from color h s l)">Attribution-NonCommercial 4.0 International<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"></a></p> </p>
+        </div>
+</body>
+</html>
