@@ -6,38 +6,108 @@ const octokit = new Octokit({
     auth: process.env.GITHUB_TOKEN
 });
 
+const { exec } = require('child_process');
+
+// ------- get the latest commit SHA ------- //
+async function gitPull() {
+    return new Promise((resolve, reject) => {
+        exec('git pull', (error, stdout, stderr) => {
+            if (error) {
+                console.error(`exec error: ${error}`);
+                return reject(error);
+            }
+            console.log(`stdout: ${stdout}`);
+            console.error(`stderr: ${stderr}`);
+            resolve(stdout);
+        });
+    });
+}
+
+await gitPull();
+
+// ------- create a new branch ------- //
+async function createBranch(owner, repo, newBranchName, mainBranchName = 'main') {
+    try {
+        // Get the SHA of the latest commit on the main branch
+        const branch = await octokit.repos.getBranch({
+            owner,
+            repo,
+            branch: mainBranchName,
+        });
+        const sha = branch.data.commit.sha;
+
+        // Create a new branch from the main branch SHA
+        await octokit.git.createRef({
+            owner,
+            repo,
+            ref: `refs/heads/${newBranchName}`,
+            sha,
+        });
+
+        console.log(`Branch created: ${newBranchName}`);
+    } catch (error) {
+        console.error('Error creating new branch:', error);
+    }
+}
+
+const newBranchName = 'test';
+const user = 'oscars47';
+const repo = 'math-zombies';
+
+await createBranch(user, repo, newBranchName);
+
 // ------- add HTTP endpoint so this file can be triggered by Google Apps Script ------- //
 const express = require('express');
 const axios = require('axios');
+const fs = require('fs');
+const path = require('path');
 const app = express();
 const port = process.env.PORT || 3000;
+
 
 app.use(express.json());
 
 app.post('/process-data', async (req, res) => {
     try {
-        const { urls } = req.body; // Expecting an array of URLs
+        const { htmlUrl, miniHtmlUrl, imageUrl, htmlName, miniHtmlName, imageName } = req.body;
 
         // Validate the URLs
-        if (!urls || !Array.isArray(urls) || urls.length === 0) {
-            return res.status(400).send('No URLs provided or the format is incorrect');
+        if (!htmlUrl || !miniHtmlUrl || !imageUrl) {
+            return res.status(400).send('Missing one or more URLs');
         }
 
-        // Process each URL
-        const results = [];
-        for (const url of urls) {
-            const response = await axios.get(url);
-            const data = response.data;
-            // Add the processed data to the results array
-            // You can also do any other processing as needed
-            results.push(data);
+        // Define a function to download a file
+        async function downloadFile(fileUrl, outputLocationPath) {
+            const writer = fs.createWriteStream(outputLocationPath);
+            const response = await axios({
+                method: 'get',
+                url: fileUrl,
+                responseType: 'stream',
+            });
+
+            response.data.pipe(writer);
+
+            return new Promise((resolve, reject) => {
+                writer.on('finish', resolve);
+                writer.on('error', reject);
+            });
         }
 
-        // Send a response back with all the results
-        res.json({ results });
+        // set paths for each file
+        const htmlPath = path.join(__dirname, '../post_files/'+htmlName);
+        const miniHtmlPath = path.join(__dirname, '../mini_files'+miniHtmlName);
+        const imagePath = path.join(__dirname, '../images'+imageName);
+
+        // Download each file
+        await downloadFile(htmlUrl, htmlPath);
+        await downloadFile(miniHtmlUrl, miniHtmlPath);
+        await downloadFile(imageUrl, imagePath);
+
+        console.log(`File downloaded successfully.`);
+        // res.send('Files downloaded successfully');
     } catch (error) {
         console.error('Error:', error);
-        res.status(500).send('An error occurred');
+        // res.status(500).send('An error occurred');
     }
 });
 
@@ -45,52 +115,90 @@ app.listen(port, () => {
     console.log(`Server running on port ${port}`);
 });
 
+// for extracting the html content from the mini file //
 
+const fs = require('fs').promises;
 
-async function editFileInRepo(owner, repo, path, line, newContent, commitMessage) {
+async function updateGitHubFileWithHtmlContent(miniHtmlPath, owner, repo, targetFilePath, insertLine, commitMessage, newBranchName) {
+    async function processAndDeleteFile(filePath) {
+        try {
+            const content = await fs.readFile(filePath, 'utf8');
+    
+            // Now delete the file
+            await fs.unlink(filePath);
+    
+            console.log(`File deleted successfully: ${filePath}`);
+            return content; // Return the content if needed
+        } catch (error) {
+            console.error('Error:', error);
+            throw error; // Rethrow the error for further handling if necessary
+        }
+    }
     try {
-        // Step 1: Retrieve the existing file content
-        const getContentResponse = await octokit.repos.getContent({
-            owner: owner,
-            repo: repo,
-            path: path
-        });
+        // Extract content from the downloaded HTML file
+        // first, process and delete mini file
+        const miniHtmlContent = await processAndDeleteFile(miniHtmlPath);
+        console.log(`got mini html content: ${miniHtmlContent}`);
 
-        const fileSha = getContentResponse.data.sha;
-        let contentBase64 = getContentResponse.data.content;
-        let content = Buffer.from(contentBase64, 'base64').toString('utf-8');
-
-        // Step 2: Modify the content
-        let contentLines = content.split('\n');
-        contentLines.splice(line - 1, 0, newContent);
-        content = contentLines.join('\n');
-        contentBase64 = Buffer.from(content).toString('base64');
-
-        // Step 3: Update the file in the repository
-        await octokit.repos.createOrUpdateFileContents({
-            owner: owner,
-            repo: repo,
-            path: path,
-            message: commitMessage,
-            content: contentBase64,
-            sha: fileSha,
-            committer: {
-                name: 'Committer Name',
-                email: 'committer-email@example.com'
-            },
-            author: {
-                name: 'Author Name',
-                email: 'author-email@example.com'
+        async function editFileInRepo(owner, repo, path, line, newContent, commitMessage) {
+            try {
+                // Step 1: Retrieve the existing file content
+                const getContentResponse = await octokit.repos.getContent({
+                    owner: owner,
+                    repo: repo,
+                    path: path
+                });
+        
+                const fileSha = getContentResponse.data.sha;
+                let contentBase64 = getContentResponse.data.content;
+                let content = Buffer.from(contentBase64, 'base64').toString('utf-8');
+        
+                // Step 2: Modify the content
+                let contentLines = content.split('\n');
+                contentLines.splice(line - 1, 0, newContent);
+                content = contentLines.join('\n');
+                contentBase64 = Buffer.from(content).toString('base64');
+        
+                // Step 3: Update the file in the repository
+                await octokit.repos.createOrUpdateFileContents({
+                    owner: owner,
+                    repo: repo,
+                    path: path,
+                    branch: newBranchName,
+                    message: commitMessage,
+                    content: contentBase64,
+                    sha: fileSha,
+                    committer: {
+                        name: 'Committer Name',
+                        email: 'committer-email@example.com'
+                    },
+                    author: {
+                        name: 'Author Name',
+                        email: 'author-email@example.com'
+                    }
+                });
+        
+                console.log(`mini description updated successfully.`);
+            } catch (error) {
+                console.error('Error:', error);
             }
-        });
+        }
 
-        console.log(`File updated successfully.`);
+        // Edit the file in the GitHub repository
+        await editFileInRepo(owner, repo, targetFilePath, insertLine, newContent, commitMessage);
     } catch (error) {
         console.error('Error:', error);
     }
 }
 
-async function uploadFileToRepo(owner, repo, filePath, commitMessage) {
+const targetFilePath = path.join(__dirname, '../posts.html');
+
+// now insert the html content into the main file
+await updateGitHubFileWithHtmlContent(miniHtmlPath, user, repo, targetFilePath, 122, 'added mini descrip for '+htmlName, newBranchName);
+
+
+// file to upload the image and main file to repo //
+async function uploadFileToRepo(owner, repo, filePath, commitMessage, newBranchName) {
     try {
         const content = fs.readFileSync(filePath, 'base64');
         const fileName = path.basename(filePath);
@@ -98,16 +206,17 @@ async function uploadFileToRepo(owner, repo, filePath, commitMessage) {
         await octokit.repos.createOrUpdateFileContents({
             owner: owner,
             repo: repo,
-            path: `path/in/your/repo/${fileName}`, // Adjust the path as needed
+            branch: newBranchName,
+            path: filePath, // assumes file path is the same as downloaded
             message: commitMessage,
             content: content,
             committer: {
-                name: 'Committer Name', // Replace with your name
-                email: 'committer-email@example.com' // Replace with your email
+                name: 'oscars47', // Replace with your name
+                email: 'orsa2020@mymail.pomona.edu' // Replace with your email
             },
             author: {
-                name: 'Author Name', // Replace with your name
-                email: 'author-email@example.com' // Replace with your email
+                name: 'oscars47', // Replace with your name
+                email: 'orsa2020@mymail.pomona.edu' // Replace with your email
             }
         });
 
@@ -117,20 +226,6 @@ async function uploadFileToRepo(owner, repo, filePath, commitMessage) {
     }
 }
 
-// Replace with your repository details and file paths
-const imageFilePath = 'path/to/your/image.jpg';
-const htmlFilePath = 'path/to/your/file.html';
-
-uploadFileToRepo(repoOwner, repoName, imageFilePath, 'Add new image');
-uploadFileToRepo(repoOwner, repoName, htmlFilePath, 'Add new HTML file');
-
-
-// Replace with your details
-const repoOwner = 'your-github-username';
-const repoName = 'your-repo-name';
-const filePath = 'path/to/your/file.txt';
-const lineToInsertAt = 5; // Line number to insert new content
-const newContent = 'Your new content here';
-const commitMessage = 'Insert content at specific line';
-
-editFileInRepo(repoOwner, repoName, filePath, lineToInsertAt, newContent, commitMessage);
+// add image and html file to repo
+await uploadFileToRepo('oscars47', 'math-zombies', htmlPath, 'added '+htmlName);
+await uploadFileToRepo('oscars47', 'math-zombies', imagePath, 'added '+imageName);
