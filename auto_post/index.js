@@ -62,7 +62,7 @@ const axios = require('axios');
 const fs = require('fs');
 const path = require('path');
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 80;
 
 
 app.use(express.json());
@@ -104,10 +104,10 @@ app.post('/process-data', async (req, res) => {
         await downloadFile(imageUrl, imagePath);
 
         console.log(`File downloaded successfully.`);
-        // res.send('Files downloaded successfully');
+        res.send('Files downloaded successfully');
     } catch (error) {
         console.error('Error:', error);
-        // res.status(500).send('An error occurred');
+        res.status(500).send('An error occurred');
     }
 });
 
