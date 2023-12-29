@@ -8,6 +8,8 @@ const octokit = new Octokit({
 
 const { exec } = require('child_process');
 
+console.log('starting file....')
+
 // ------- get the latest commit SHA ------- //
 async function gitPull() {
     return new Promise((resolve, reject) => {
@@ -24,6 +26,8 @@ async function gitPull() {
 }
 
 await gitPull();
+
+console.log('pulled from git')
 
 // ------- create a new branch ------- //
 async function createBranch(owner, repo, newBranchName, mainBranchName = 'main') {
@@ -55,6 +59,8 @@ const user = 'oscars47';
 const repo = 'math-zombies';
 
 await createBranch(user, repo, newBranchName);
+
+console.log('created branch')
 
 // ------- add HTTP endpoint so this file can be triggered by Google Apps Script ------- //
 const express = require('express');
