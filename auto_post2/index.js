@@ -24,8 +24,8 @@ async function downloadFile(url, path) {
 
 // Main function
 async function main(htmlUrl, miniHtmlUrl, imageUrl, htmlName, miniHtmlName, imageName, summary) {
-
-    console.log('version 0.0.5.....')
+    // Initialize simple-git
+    console.log('Initializing git at '+ Date.now() + '...');
     const git = simpleGit({
         baseDir: process.cwd(),
         binary: 'git',
@@ -122,4 +122,7 @@ const server = net.createServer((socket) => {
   
   server.listen(8080, () => {
     console.log('Server listening on port 8080');
+    console.log('+---------------+')
+    console.log('+ version 0.0.5 +')
+    console.log('+---------------+')
   });
