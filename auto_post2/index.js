@@ -97,7 +97,7 @@ async function main(htmlUrl, miniHtmlUrl, imageUrl, htmlName, miniHtmlName, imag
                 );
       
                 // Write the updated HTML back to the file
-                fs.writeFile(targetHtmlPath, updatedHtml);
+                fsp.writeFile(targetHtmlPath, updatedHtml);
               });
           })
           .catch(error => {
