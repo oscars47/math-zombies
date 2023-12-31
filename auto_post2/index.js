@@ -65,6 +65,10 @@ async function main(htmlUrl, miniHtmlUrl, imageUrl, htmlName, miniHtmlName, imag
     await downloadFile(miniHtmlUrl, miniHtmlFileName);
     await downloadFile(imageUrl, imageFileName);
 
+    // pull from master
+    console.log('Pulling from master...');
+    await git.pull('origin', 'master');
+
     console.log('Creating a new branch...');
     const newBranch = 'new-branch-'+Date.now();
     await git.checkoutLocalBranch(newBranch);
