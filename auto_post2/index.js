@@ -23,10 +23,13 @@ async function downloadFile(url, path) {
   }
 
 // Main function
-async function main(htmlUrl, miniHtmlUrl, imageUrl, htmlName, miniHtmlName, imageName) {
+async function main(htmlUrl, miniHtmlUrl, imageUrl, htmlName, miniHtmlName, imageName, summary) {
 
     console.log('version 0.0.3.....')
     const git = simpleGit();
+    process.env.GIT_ASKPASS = 'echo';
+    process.env.GIT_USERNAME = 'oscars47';
+    process.env.GIT_PASSWORD = process.env.GITHUB_TOKEN; // Token stored in an environment variable
 
     const htmlFileName = '../post_files/'+htmlName
     const miniHtmlFileName = '../post_files/'+miniHtmlName
@@ -45,14 +48,15 @@ async function main(htmlUrl, miniHtmlUrl, imageUrl, htmlName, miniHtmlName, imag
     console.log('Adding files to the branch...');
     await git.add([htmlFileName, imageFileName]);
 
-    console.log('Committing changes...');
-    await git.commit('Add new files');
-
     console.log('Inserting miniHTML into target HTML file...');
     const targetHtml = await fsPromises.readFile('../posts.html', 'utf8');
     const miniHtml = await fsPromises.readFile(miniHtmlFileName, 'utf8');
     const updatedHtml = targetHtml.replace('<!-- ADD NEW POSTS HERE -->', '<!-- ADD NEW POSTS HERE -->\n' + miniHtml);
     await fsPromises.writeFile('../posts.html', updatedHtml);
+    await git.add('../posts.html');
+
+    console.log('Committing changes...');
+    await git.commit('Add new post: '+htmlName+' - '+summary);
 
     console.log('Deleting miniHTML file...');
     await fsPromises.unlink(miniHtmlFileName);
