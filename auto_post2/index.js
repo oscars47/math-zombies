@@ -102,10 +102,15 @@ const server = net.createServer((socket) => {
   
     socket.on('data', async (data) => {
       try {
-        console.log('Received data:', data.toString());
-  
+        data = data.toString().trim();
+
+        // find first occurence of { to start parsing
+        let start = data.indexOf('{');
+        let end = data.indexOf('}');
+        data = data.substring(start, end+1);
+    
         // Assuming data is a JSON string with the necessary information
-        const { htmlUrl, miniHtmlUrl, imageUrl, htmlName, miniHtmlName, imageName } = JSON.parse(data.toString());
+        const { htmlUrl, miniHtmlUrl, imageUrl, htmlName, miniHtmlName, imageName } = JSON.parse(data);
         
         // Call the main function with the received data
         await main(htmlUrl, miniHtmlUrl, imageUrl, htmlName, miniHtmlName, imageName);
