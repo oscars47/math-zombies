@@ -1,3 +1,4 @@
+const net = require('net');
 const axios = require('axios');
 const fs = require('fs').promises;
 const simpleGit = require('simple-git');
@@ -57,5 +58,30 @@ async function main(htmlUrl, miniHtmlUrl, imageUrl, htmlName, miniHtmlName, imag
   }
 }
 
-// Example usage
-main('htmlFileUrl', 'miniHtmlFileUrl', 'imageUrl', 'htmlName.html', 'miniHtmlName.html', 'imageName.png');
+// TCP Server Setup
+const server = net.createServer((socket) => {
+    console.log('Client connected');
+  
+    socket.on('data', async (data) => {
+      try {
+        console.log('Received data:', data.toString());
+  
+        // Assuming data is a JSON string with the necessary information
+        const { htmlUrl, miniHtmlUrl, imageUrl, htmlName, miniHtmlName, imageName } = JSON.parse(data.toString());
+        
+        // Call the main function with the received data
+        await main(htmlUrl, miniHtmlUrl, imageUrl, htmlName, miniHtmlName, imageName);
+  
+      } catch (error) {
+        console.error('Error processing data:', error);
+      }
+    });
+  
+    socket.on('end', () => {
+      console.log('Client disconnected');
+    });
+  });
+  
+  server.listen(8080, () => {
+    console.log('Server listening on port 8080');
+  });
