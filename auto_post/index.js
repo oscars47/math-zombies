@@ -64,56 +64,6 @@ const port = process.env.PORT || 80;
 
 const targetFilePath = path.join(__dirname, '../posts.html');
 
-
-app.use(express.json());
-app.post('/process-data', async (req, res) => {
-    try {
-        const { htmlUrl, miniHtmlUrl, imageUrl, htmlName, miniHtmlName, imageName } = req.body;
-
-        // Validate the URLs
-        if (!htmlUrl || !miniHtmlUrl || !imageUrl) {
-            return res.status(400).send('Missing one or more URLs');
-        }
-
-        // Define a function to download a file
-        async function downloadFile(fileUrl, outputLocationPath) {
-            const writer = fs.createWriteStream(outputLocationPath);
-            const response = await axios({
-                method: 'get',
-                url: fileUrl,
-                responseType: 'stream',
-            });
-
-            response.data.pipe(writer);
-
-            return new Promise((resolve, reject) => {
-                writer.on('finish', resolve);
-                writer.on('error', reject);
-            });
-        }
-
-        // set paths for each file
-        const htmlPath = path.join(__dirname, '../post_files/'+htmlName);
-        const miniHtmlPath = path.join(__dirname, '../mini_files'+miniHtmlName);
-        const imagePath = path.join(__dirname, '../images'+imageName);
-
-        // Download each file
-        await downloadFile(htmlUrl, htmlPath);
-        await downloadFile(miniHtmlUrl, miniHtmlPath);
-        await downloadFile(imageUrl, imagePath);
-
-        console.log(`File downloaded successfully.`);
-        res.send('Files downloaded successfully');
-    } catch (error) {
-        console.error('Error:', error);
-        res.status(500).send('An error occurred');
-    }
-});
-
-app.listen(port, () => {
-    console.log(`Server running on port ${port}`);
-});
-
 // for extracting the html content from the mini file //
 
 async function updateGitHubFileWithHtmlContent(miniHtmlPath, owner, repo, targetFilePath, insertLine, commitMessage, newBranchName) {
@@ -225,6 +175,56 @@ async function main() {
     await gitPull();
     console.log('pulled from git')
 
+    app.use(express.json());
+    app.post('/process-data', async (req, res) => {
+        try {
+            const { htmlUrl, miniHtmlUrl, imageUrl, htmlName, miniHtmlName, imageName } = req.body;
+
+            // Validate the URLs
+            if (!htmlUrl || !miniHtmlUrl || !imageUrl) {
+                return res.status(400).send('Missing one or more URLs');
+            }
+
+            // Define a function to download a file
+            async function downloadFile(fileUrl, outputLocationPath) {
+                const writer = fs.createWriteStream(outputLocationPath);
+                const response = await axios({
+                    method: 'get',
+                    url: fileUrl,
+                    responseType: 'stream',
+                });
+
+                response.data.pipe(writer);
+
+                return new Promise((resolve, reject) => {
+                    writer.on('finish', resolve);
+                    writer.on('error', reject);
+                });
+            }
+
+            // set paths for each file
+            const htmlPath = path.join(__dirname, '../post_files/'+htmlName);
+            const miniHtmlPath = path.join(__dirname, '../mini_files'+miniHtmlName);
+            const imagePath = path.join(__dirname, '../images'+imageName);
+
+            // Download each file
+            await downloadFile(htmlUrl, htmlPath);
+            await downloadFile(miniHtmlUrl, miniHtmlPath);
+            await downloadFile(imageUrl, imagePath);
+
+            console.log(`File downloaded successfully.`);
+            res.send('Files downloaded successfully');
+        } catch (error) {
+            console.error('Error:', error);
+            res.status(500).send('An error occurred');
+        }
+    });
+
+    app.listen(port, () => {
+        console.log(`Server running on port ${port}`);
+    });
+
+
     await createBranch(user, repo, newBranchName);
     console.log('created branch')
 
@@ -237,3 +237,5 @@ async function main() {
     await uploadFileToRepo('oscars47', 'math-zombies', imagePath, 'added '+imageName);
 
 }
+
+main();
