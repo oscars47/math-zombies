@@ -81,9 +81,9 @@ async function main(htmlUrl, miniHtmlUrl, imageUrl, htmlName, miniHtmlName, imag
     console.log('mini file:' + miniHtml)
     
     function insertMiniHtml(targetHtmlPath, miniHtmlPath) {
-        return fs.readFile(targetHtmlPath, 'utf8')
+        return fsp.readFile(targetHtmlPath, 'utf8')
           .then(targetHtml => {
-            return fs.readFile(miniHtmlPath, 'utf8')
+            return fsp.readFile(miniHtmlPath, 'utf8')
               .then(miniHtml => {
                 // Check if the marker exists in the target HTML
                 if (!targetHtml.includes('<!-- ADD NEW POSTS HERE -->')) {
