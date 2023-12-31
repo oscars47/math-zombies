@@ -28,9 +28,9 @@ async function main(htmlUrl, miniHtmlUrl, imageUrl, htmlName, miniHtmlName, imag
 
   try {
     console.log('Downloading files...');
-    await downloadFile(htmlUrl, htmlName);
-    await downloadFile(miniHtmlUrl, miniHtmlName);
-    await downloadFile(imageUrl, imageName);
+    await downloadFile(htmlUrl, '../post_files/'+htmlName);
+    await downloadFile(miniHtmlUrl, '../post_files/'+miniHtmlName);
+    await downloadFile(imageUrl, '../images/'+imageName);
 
     console.log('Creating a new branch...');
     await git.checkoutLocalBranch('new-branch');
@@ -42,10 +42,10 @@ async function main(htmlUrl, miniHtmlUrl, imageUrl, htmlName, miniHtmlName, imag
     await git.commit('Add new files');
 
     console.log('Inserting miniHTML into target HTML file...');
-    const targetHtml = await fsPromises.readFile('target.html', 'utf8');
+    const targetHtml = await fsPromises.readFile('../posts.html', 'utf8');
     const miniHtml = await fsPromises.readFile(miniHtmlName, 'utf8');
     const updatedHtml = targetHtml.replace('<!-- ADD NEW POSTS HERE -->', '<!-- ADD NEW POSTS HERE -->\n' + miniHtml);
-    await fsPromises.writeFile('target.html', updatedHtml);
+    await fsPromises.writeFile('../posts.html', updatedHtml);
 
     console.log('Deleting miniHTML file...');
     await fsPromises.unlink(miniHtmlName);
