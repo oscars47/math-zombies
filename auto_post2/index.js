@@ -80,7 +80,7 @@ async function main(htmlUrl, miniHtmlUrl, imageUrl, htmlName, miniHtmlName, imag
     await git.add('../posts.html');
 
     console.log('Committing changes...');
-    await git.commit('Add new post: '+htmlName+' - '+summary);
+    await git.commit('Add new post: '+htmlName+'. Summary:'+summary);
 
     console.log('Deleting miniHTML file...');
     await fsPromises.unlink(miniHtmlFileName);
@@ -110,10 +110,10 @@ const server = net.createServer((socket) => {
         console.log('Received data from client:', data);
     
         // Assuming data is a JSON string with the necessary information
-        const { htmlUrl, miniHtmlUrl, imageUrl, htmlName, miniHtmlName, imageName } = JSON.parse(data);
+        const { htmlUrl, miniHtmlUrl, imageUrl, htmlName, miniHtmlName, imageName, summary } = JSON.parse(data);
         
         // Call the main function with the received data
-        await main(htmlUrl, miniHtmlUrl, imageUrl, htmlName, miniHtmlName, imageName);
+        await main(htmlUrl, miniHtmlUrl, imageUrl, htmlName, miniHtmlName, imageName, summary);
   
       } catch (error) {
         console.error('Error processing data:', error);
@@ -128,6 +128,6 @@ const server = net.createServer((socket) => {
   server.listen(8080, () => {
     console.log('Server listening on port 8080');
     console.log('+---------------+')
-    console.log('+ version 0.0.6 +')
+    console.log('+ version 0.0.7 +')
     console.log('+---------------+')
   });
