@@ -25,7 +25,7 @@ async function downloadFile(url, path) {
 // Main function
 async function main(htmlUrl, miniHtmlUrl, imageUrl, htmlName, miniHtmlName, imageName) {
 
-    console.log('version 0.0.1.....')
+    console.log('version 0.0.3.....')
     const git = simpleGit();
 
     const htmlFileName = '../post_files/'+htmlName
@@ -55,7 +55,7 @@ async function main(htmlUrl, miniHtmlUrl, imageUrl, htmlName, miniHtmlName, imag
     await fsPromises.writeFile('../posts.html', updatedHtml);
 
     console.log('Deleting miniHTML file...');
-    await fsPromises.unlink(miniHtmlName);
+    await fsPromises.unlink(miniHtmlFileName);
 
     console.log('Pushing changes to GitHub...');
     await git.push('origin', newBranch);
