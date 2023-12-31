@@ -77,8 +77,6 @@ async function main(htmlUrl, miniHtmlUrl, imageUrl, htmlName, miniHtmlName, imag
     console.log('mini file:' + miniHtml)
     
     function insertMiniHtml(targetHtmlPath, miniHtmlPath) {
-        const fs = require('fs').promises;
-      
         return fs.readFile(targetHtmlPath, 'utf8')
           .then(targetHtml => {
             return fs.readFile(miniHtmlPath, 'utf8')
@@ -95,7 +93,7 @@ async function main(htmlUrl, miniHtmlUrl, imageUrl, htmlName, miniHtmlName, imag
                 );
       
                 // Write the updated HTML back to the file
-                return fs.writeFile(targetHtmlPath, updatedHtml);
+                fs.writeFile(targetHtmlPath, updatedHtml);
               });
           })
           .catch(error => {
@@ -104,7 +102,7 @@ async function main(htmlUrl, miniHtmlUrl, imageUrl, htmlName, miniHtmlName, imag
       }
 
     console.log('Writing updated HTML file...');
-    const updatedHtml = insertMiniHtml('../posts.html', miniHtmlFileName);    
+    insertMiniHtml('../posts.html', miniHtmlFileName);    
     
     await git.add('../posts.html');
 
