@@ -8,8 +8,6 @@ const octokit = new Octokit({
 
 const { exec } = require('child_process');
 
-console.log('starting file....')
-
 // ------- get the latest commit SHA ------- //
 async function gitPull() {
     return new Promise((resolve, reject) => {
@@ -24,10 +22,6 @@ async function gitPull() {
         });
     });
 }
-
-await gitPull();
-
-console.log('pulled from git')
 
 // ------- create a new branch ------- //
 async function createBranch(owner, repo, newBranchName, mainBranchName = 'main') {
@@ -58,10 +52,6 @@ const newBranchName = 'test';
 const user = 'oscars47';
 const repo = 'math-zombies';
 
-await createBranch(user, repo, newBranchName);
-
-console.log('created branch')
-
 // ------- add HTTP endpoint so this file can be triggered by Google Apps Script ------- //
 const express = require('express');
 const axios = require('axios');
@@ -70,9 +60,10 @@ const path = require('path');
 const app = express();
 const port = process.env.PORT || 80;
 
+const targetFilePath = path.join(__dirname, '../posts.html');
+
 
 app.use(express.json());
-
 app.post('/process-data', async (req, res) => {
     try {
         const { htmlUrl, miniHtmlUrl, imageUrl, htmlName, miniHtmlName, imageName } = req.body;
@@ -197,12 +188,6 @@ async function updateGitHubFileWithHtmlContent(miniHtmlPath, owner, repo, target
     }
 }
 
-const targetFilePath = path.join(__dirname, '../posts.html');
-
-// now insert the html content into the main file
-await updateGitHubFileWithHtmlContent(miniHtmlPath, user, repo, targetFilePath, 122, 'added mini descrip for '+htmlName, newBranchName);
-
-
 // file to upload the image and main file to repo //
 async function uploadFileToRepo(owner, repo, filePath, commitMessage, newBranchName) {
     try {
@@ -232,6 +217,23 @@ async function uploadFileToRepo(owner, repo, filePath, commitMessage, newBranchN
     }
 }
 
-// add image and html file to repo
-await uploadFileToRepo('oscars47', 'math-zombies', htmlPath, 'added '+htmlName);
-await uploadFileToRepo('oscars47', 'math-zombies', imagePath, 'added '+imageName);
+// ---------- perform all functions ---------- //
+async function main() {
+
+    console.log('starting script...')
+
+    await gitPull();
+    console.log('pulled from git')
+
+    await createBranch(user, repo, newBranchName);
+    console.log('created branch')
+
+    // now insert the html content into the main file
+    await updateGitHubFileWithHtmlContent(miniHtmlPath, user, repo, targetFilePath, 122, 'added mini descrip for '+htmlName, newBranchName);
+
+
+    // add image and html file to repo
+    await uploadFileToRepo('oscars47', 'math-zombies', htmlPath, 'added '+htmlName);
+    await uploadFileToRepo('oscars47', 'math-zombies', imagePath, 'added '+imageName);
+
+}
