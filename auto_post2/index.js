@@ -67,7 +67,7 @@ async function main(htmlUrl, miniHtmlUrl, imageUrl, htmlName, miniHtmlName, imag
 
     // pull from master
     console.log('Pulling from master...');
-    await git.pull('origin', 'master');
+    await git.pull('origin', 'main');
 
     console.log('Creating a new branch...');
     const newBranch = 'new-branch-'+Date.now();
