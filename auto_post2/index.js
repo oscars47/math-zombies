@@ -65,6 +65,10 @@ async function main(htmlUrl, miniHtmlUrl, imageUrl, htmlName, miniHtmlName, imag
     await downloadFile(miniHtmlUrl, miniHtmlFileName);
     await downloadFile(imageUrl, imageFileName);
 
+    console.log('HTML file downloaded to '+htmlFileName);
+    console.log('miniHTML file downloaded to '+miniHtmlFileName);
+    console.log('Image file downloaded to '+imageFileName);
+
     // pull from master
     console.log('Pulling from master...');
     await git.pull('origin', 'main');
@@ -77,8 +81,7 @@ async function main(htmlUrl, miniHtmlUrl, imageUrl, htmlName, miniHtmlName, imag
     await git.add([htmlFileName, imageFileName]);
 
     console.log('Inserting miniHTML into target HTML file...');
-    const miniHtml = await fsp.readFile(miniHtmlFileName, 'utf8');
-    console.log('mini file:' + miniHtml)
+    // const miniHtml = await fsp.readFile(miniHtmlFileName, 'utf8');
     
     function insertMiniHtml(targetHtmlPath, miniHtmlPath) {
         return fsp.readFile(targetHtmlPath, 'utf8')
