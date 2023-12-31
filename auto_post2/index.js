@@ -84,9 +84,9 @@ async function main(htmlUrl, miniHtmlUrl, imageUrl, htmlName, miniHtmlName, imag
     console.log('Image file downloaded to '+imageFileName);
 
     // pull from master
-    console.log('Pulling from master...');
+    console.log('Pulling from main...');
     try {
-        await git.pull('origin', 'master');
+        await git.pull('origin', 'main');
     }
     catch (error) {
         console.log('Fetching from origin...');
@@ -96,7 +96,7 @@ async function main(htmlUrl, miniHtmlUrl, imageUrl, htmlName, miniHtmlName, imag
         console.log('Checking out...');
         await execShellCommand('git checkout .');
         console.log('Git commands executed successfully');
-        await git.pull('origin', 'master');
+        await git.pull('origin', 'main');
     }
 
     console.log('Creating a new branch...');
