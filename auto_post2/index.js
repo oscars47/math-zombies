@@ -55,7 +55,7 @@ async function main(htmlUrl, miniHtmlUrl, imageUrl, htmlName, miniHtmlName, imag
         console.error('Error:', error);
     }    
 
-    const htmlFileName = '../post_files/'+htmlName
+    const htmlFileName = '../post_files/'+htmlName+'.html'
     const miniHtmlFileName = '../post_files/'+miniHtmlName
     const imageFileName = '../images/'+imageName
 
