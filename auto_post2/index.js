@@ -1,7 +1,7 @@
 const net = require('net');
 const axios = require('axios');
 const fs = require('fs'); // Import standard fs for createWriteStream
-const fsPromises = fs.promises; // Continue using fs.promises for other async operations
+const fsp = fs.promises; // Continue using fs.promises for other async operations
 const simpleGit = require('simple-git');
 
 // Function to download a file
@@ -77,7 +77,7 @@ async function main(htmlUrl, miniHtmlUrl, imageUrl, htmlName, miniHtmlName, imag
     await git.add([htmlFileName, imageFileName]);
 
     console.log('Inserting miniHTML into target HTML file...');
-    const miniHtml = await fsPromises.readFile(miniHtmlFileName, 'utf8');
+    const miniHtml = await fsp.readFile(miniHtmlFileName, 'utf8');
     console.log('mini file:' + miniHtml)
     
     function insertMiniHtml(targetHtmlPath, miniHtmlPath) {
@@ -114,7 +114,7 @@ async function main(htmlUrl, miniHtmlUrl, imageUrl, htmlName, miniHtmlName, imag
     await git.commit('Add new post: '+htmlName+'. Summary:'+summary);
 
     console.log('Deleting miniHTML file...');
-    await fsPromises.unlink(miniHtmlFileName);
+    await fsp.unlink(miniHtmlFileName);
 
     console.log('Pushing changes to GitHub...');
     await git.push('origin', newBranch);
