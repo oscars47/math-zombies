@@ -51,8 +51,6 @@ async function main(htmlUrl, miniHtmlUrl, imageUrl, htmlName, miniHtmlName, imag
             await git.addRemote('origin', remoteWithToken);
         }
     
-        // ... rest of your git operations
-    
     } catch (error) {
         console.error('Error:', error);
     }    
@@ -68,7 +66,7 @@ async function main(htmlUrl, miniHtmlUrl, imageUrl, htmlName, miniHtmlName, imag
     await downloadFile(imageUrl, imageFileName);
 
     console.log('Creating a new branch...');
-    const newBranch = 'new-branch-'+htmlName.replace('.html', '')+'-'+Date.now();
+    const newBranch = 'new-branch-'+Date.now();
     await git.checkoutLocalBranch(newBranch);
 
     console.log('Adding files to the branch...');
@@ -108,6 +106,8 @@ const server = net.createServer((socket) => {
         let start = data.indexOf('{');
         let end = data.indexOf('}');
         data = data.substring(start, end+1);
+
+        console.log('Received data from client:', data);
     
         // Assuming data is a JSON string with the necessary information
         const { htmlUrl, miniHtmlUrl, imageUrl, htmlName, miniHtmlName, imageName } = JSON.parse(data);
@@ -128,6 +128,6 @@ const server = net.createServer((socket) => {
   server.listen(8080, () => {
     console.log('Server listening on port 8080');
     console.log('+---------------+')
-    console.log('+ version 0.0.5 +')
+    console.log('+ version 0.0.6 +')
     console.log('+---------------+')
   });
