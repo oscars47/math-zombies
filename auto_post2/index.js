@@ -42,7 +42,7 @@ async function main(htmlUrl, miniHtmlUrl, imageUrl, htmlName, miniHtmlName, imag
     console.log('Inserting miniHTML into target HTML file...');
     const targetHtml = await fs.readFile('target.html', 'utf8');
     const miniHtml = await fs.readFile(miniHtmlName, 'utf8');
-    const updatedHtml = targetHtml.replace('<!-- insert here -->', miniHtml);
+    const updatedHtml = targetHtml.replace('<!-- ADD NEW POSTS HERE -->', '<!-- ADD NEW POSTS HERE -->\n' + miniHtml);
     await fs.writeFile('target.html', updatedHtml);
 
     console.log('Deleting miniHTML file...');
