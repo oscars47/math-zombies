@@ -56,7 +56,7 @@ const email = 'orsa2020@mymail.pomona.edu';
 // ------- add HTTP endpoint so this file can be triggered by Google Apps Script ------- //
 const express = require('express');
 const axios = require('axios');
-const fs = require('fs');
+const fs = require('fs').promises;
 const path = require('path');
 const app = express();
 const port = process.env.PORT || 80;
@@ -114,8 +114,6 @@ app.listen(port, () => {
 });
 
 // for extracting the html content from the mini file //
-
-const fs = require('fs').promises;
 
 async function updateGitHubFileWithHtmlContent(miniHtmlPath, owner, repo, targetFilePath, insertLine, commitMessage, newBranchName) {
     async function processAndDeleteFile(filePath) {
