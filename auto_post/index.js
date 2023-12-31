@@ -56,7 +56,8 @@ const email = 'orsa2020@mymail.pomona.edu';
 // ------- add HTTP endpoint so this file can be triggered by Google Apps Script ------- //
 const express = require('express');
 const axios = require('axios');
-const fs = require('fs').promises;
+const fs = require('fs');
+const fsp = require('fs').promises;
 const path = require('path');
 const app = express();
 const port = process.env.PORT || 80;
@@ -118,10 +119,10 @@ app.listen(port, () => {
 async function updateGitHubFileWithHtmlContent(miniHtmlPath, owner, repo, targetFilePath, insertLine, commitMessage, newBranchName) {
     async function processAndDeleteFile(filePath) {
         try {
-            const content = await fs.readFile(filePath, 'utf8');
+            const content = await fsp.readFile(filePath, 'utf8');
     
             // Now delete the file
-            await fs.unlink(filePath);
+            await fsp.unlink(filePath);
     
             console.log(`File deleted successfully: ${filePath}`);
             return content; // Return the content if needed
