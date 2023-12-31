@@ -33,7 +33,8 @@ async function main(htmlUrl, miniHtmlUrl, imageUrl, htmlName, miniHtmlName, imag
     await downloadFile(imageUrl, '../images/'+imageName);
 
     console.log('Creating a new branch...');
-    await git.checkoutLocalBranch('new-branch-'+htmlName.replace('.html', ''));
+    const newBranch = 'new-branch-'+htmlName.replace('.html', '');
+    await git.checkoutLocalBranch(newBranch);
 
     console.log('Adding files to the branch...');
     await git.add([htmlName, imageName]);
@@ -51,7 +52,7 @@ async function main(htmlUrl, miniHtmlUrl, imageUrl, htmlName, miniHtmlName, imag
     await fsPromises.unlink(miniHtmlName);
 
     console.log('Pushing changes to GitHub...');
-    await git.push('origin', 'new-branch');
+    await git.push('origin', newBranch);
 
     console.log('Task completed successfully.');
   } catch (error) {
