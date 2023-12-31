@@ -24,6 +24,9 @@ async function downloadFile(url, path) {
 
 // Main function
 async function main(htmlUrl, miniHtmlUrl, imageUrl, htmlName, miniHtmlName, imageName) {
+
+console.log('version 0.0.1.....')
+
   const git = simpleGit();
 
   try {
@@ -33,7 +36,7 @@ async function main(htmlUrl, miniHtmlUrl, imageUrl, htmlName, miniHtmlName, imag
     await downloadFile(imageUrl, '../images/'+imageName);
 
     console.log('Creating a new branch...');
-    const newBranch = 'new-branch-'+htmlName.replace('.html', '');
+    const newBranch = 'new-branch-'+htmlName.replace('.html', '')+'-'+Date.now();
     await git.checkoutLocalBranch(newBranch);
 
     console.log('Adding files to the branch...');
