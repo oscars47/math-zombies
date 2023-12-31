@@ -71,7 +71,19 @@ async function main(htmlUrl, miniHtmlUrl, imageUrl, htmlName, miniHtmlName, imag
 
     // pull from master
     console.log('Pulling from master...');
-    await git.pull('origin', 'main');
+    try {
+        await git.pull('origin', 'master');
+    }
+    catch (error) {
+        console.log('Fetching from origin...');
+        await execShellCommand('git fetch origin');
+        console.log('Resetting to origin/main...');
+        await execShellCommand('git reset --hard origin/main');
+        console.log('Checking out...');
+        await execShellCommand('git checkout .');
+        console.log('Git commands executed successfully');
+        await git.pull('origin', 'master');
+    }
 
     console.log('Creating a new branch...');
     const newBranch = 'new-branch-'+Date.now();
