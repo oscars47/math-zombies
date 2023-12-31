@@ -25,29 +25,32 @@ async function downloadFile(url, path) {
 // Main function
 async function main(htmlUrl, miniHtmlUrl, imageUrl, htmlName, miniHtmlName, imageName) {
 
-console.log('version 0.0.1.....')
+    console.log('version 0.0.1.....')
+    const git = simpleGit();
 
-  const git = simpleGit();
+    const htmlFileName = '../post_files/'+htmlName
+    const miniHtmlFileName = '../post_files/'+miniHtmlName
+    const imageFileName = '../images/'+imageName
 
   try {
     console.log('Downloading files...');
-    await downloadFile(htmlUrl, '../post_files/'+htmlName);
-    await downloadFile(miniHtmlUrl, '../post_files/'+miniHtmlName);
-    await downloadFile(imageUrl, '../images/'+imageName);
+    await downloadFile(htmlUrl, htmlFileName);
+    await downloadFile(miniHtmlUrl, miniHtmlFileName);
+    await downloadFile(imageUrl, imageFileName);
 
     console.log('Creating a new branch...');
     const newBranch = 'new-branch-'+htmlName.replace('.html', '')+'-'+Date.now();
     await git.checkoutLocalBranch(newBranch);
 
     console.log('Adding files to the branch...');
-    await git.add([htmlName, imageName]);
+    await git.add([htmlFileName, imageFileName]);
 
     console.log('Committing changes...');
     await git.commit('Add new files');
 
     console.log('Inserting miniHTML into target HTML file...');
     const targetHtml = await fsPromises.readFile('../posts.html', 'utf8');
-    const miniHtml = await fsPromises.readFile(miniHtmlName, 'utf8');
+    const miniHtml = await fsPromises.readFile(miniHtmlFileName, 'utf8');
     const updatedHtml = targetHtml.replace('<!-- ADD NEW POSTS HERE -->', '<!-- ADD NEW POSTS HERE -->\n' + miniHtml);
     await fsPromises.writeFile('../posts.html', updatedHtml);
 
