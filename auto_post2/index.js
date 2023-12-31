@@ -33,7 +33,7 @@ async function main(htmlUrl, miniHtmlUrl, imageUrl, htmlName, miniHtmlName, imag
     await downloadFile(imageUrl, '../images/'+imageName);
 
     console.log('Creating a new branch...');
-    await git.checkoutLocalBranch('new-branch');
+    await git.checkoutLocalBranch('new-branch-'+htmlName.replace('.html', ''));
 
     console.log('Adding files to the branch...');
     await git.add([htmlName, imageName]);
