@@ -72,10 +72,43 @@ async function main(htmlUrl, miniHtmlUrl, imageUrl, htmlName, miniHtmlName, imag
     console.log('Adding files to the branch...');
     await git.add([htmlFileName, imageFileName]);
 
+    console.log('mini file:' + miniHtml)
+
     console.log('Inserting miniHTML into target HTML file...');
     const targetHtml = await fsPromises.readFile('../posts.html', 'utf8');
     const miniHtml = await fsPromises.readFile(miniHtmlFileName, 'utf8');
     const updatedHtml = targetHtml.replace('<!-- ADD NEW POSTS HERE -->', '<!-- ADD NEW POSTS HERE -->\n' + miniHtml);
+    
+    function insertMiniHtml(targetHtmlPath, miniHtmlPath) {
+        const fs = require('fs').promises;
+      
+        return fs.readFile(targetHtmlPath, 'utf8')
+          .then(targetHtml => {
+            return fs.readFile(miniHtmlPath, 'utf8')
+              .then(miniHtml => {
+                // Check if the marker exists in the target HTML
+                if (!targetHtml.includes('<!-- ADD NEW POSTS HERE -->')) {
+                  throw new Error('Marker not found in target HTML');
+                }
+      
+                // Replace the marker with marker + miniHtml
+                const updatedHtml = targetHtml.replace(
+                  '<!-- ADD NEW POSTS HERE -->',
+                  `<!-- ADD NEW POSTS HERE -->\n${miniHtml}`
+                );
+      
+                // Write the updated HTML back to the file
+                return fs.writeFile(targetHtmlPath, updatedHtml);
+              });
+          })
+          .catch(error => {
+            console.error('An error occurred:', error);
+          });
+      }
+
+    console.log('Writing updated HTML file...');
+    const newFile = insertMiniHtml('..posts.html', miniHtmlFileName);    
+    
     await fsPromises.writeFile('../posts.html', updatedHtml);
     await git.add('../posts.html');
 
