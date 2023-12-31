@@ -25,11 +25,22 @@ async function downloadFile(url, path) {
 // Main function
 async function main(htmlUrl, miniHtmlUrl, imageUrl, htmlName, miniHtmlName, imageName, summary) {
 
-    console.log('version 0.0.3.....')
-    const git = simpleGit();
-    process.env.GIT_ASKPASS = 'echo';
-    process.env.GIT_USERNAME = 'oscars47';
-    process.env.GIT_PASSWORD = process.env.GITHUB_TOKEN; // Token stored in an environment variable
+    console.log('version 0.0.4.....')
+    const git = simpleGit({
+        baseDir: process.cwd(),
+        binary: 'git',
+        config: []
+    });
+    
+    // Assuming the token is stored in an environment variable GITHUB_TOKEN
+    const token = process.env.GITHUB_TOKEN; // Replace with your method of storing the token
+    const repo = 'https://github.com/oscars47/math-zombies.git';
+    
+    // Update remote URL to include the token
+    const remote = `https://${token}:x-oauth-basic@${repo.replace('https://', '')}`;
+    
+    // Use the updated remote URL in your Git operations
+    await git.addRemote('origin', remote);
 
     const htmlFileName = '../post_files/'+htmlName
     const miniHtmlFileName = '../post_files/'+miniHtmlName
