@@ -25,22 +25,37 @@ async function downloadFile(url, path) {
 // Main function
 async function main(htmlUrl, miniHtmlUrl, imageUrl, htmlName, miniHtmlName, imageName, summary) {
 
-    console.log('version 0.0.4.....')
+    console.log('version 0.0.5.....')
     const git = simpleGit({
         baseDir: process.cwd(),
         binary: 'git',
         config: []
     });
     
-    // Assuming the token is stored in an environment variable GITHUB_TOKEN
-    const token = process.env.GITHUB_TOKEN; // Replace with your method of storing the token
+    const token = process.env.GITHUB_TOKEN; 
     const repo = 'https://github.com/oscars47/math-zombies.git';
     
-    // Update remote URL to include the token
-    const remote = `https://${token}:x-oauth-basic@${repo.replace('https://', '')}`;
+    // Form the remote URL with the token
+    const remoteWithToken = `https://${token}:x-oauth-basic@${repo.replace('https://', '')}`;
     
-    // Use the updated remote URL in your Git operations
-    await git.addRemote('origin', remote);
+    try {
+        // Check if the 'origin' remote already exists
+        const remotes = await git.getRemotes(true);
+        const originExists = remotes.some(remote => remote.name === 'origin');
+    
+        if (originExists) {
+            // Update the existing 'origin' remote
+            await git.remote(['set-url', 'origin', remoteWithToken]);
+        } else {
+            // Add 'origin' remote if it doesn't exist
+            await git.addRemote('origin', remoteWithToken);
+        }
+    
+        // ... rest of your git operations
+    
+    } catch (error) {
+        console.error('Error:', error);
+    }    
 
     const htmlFileName = '../post_files/'+htmlName
     const miniHtmlFileName = '../post_files/'+miniHtmlName
