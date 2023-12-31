@@ -70,7 +70,6 @@ async function updateGitHubFileWithHtmlContent(miniHtmlPath, owner, repo, target
     async function processAndDeleteFile(filePath) {
         try {
             const content = await fsp.readFile(filePath, 'utf8');
-    
             // Now delete the file
             await fsp.unlink(filePath);
     
@@ -82,6 +81,7 @@ async function updateGitHubFileWithHtmlContent(miniHtmlPath, owner, repo, target
         }
     }
     try {
+        console.log(`Processing file: ${miniHtmlPath}`);
         // Extract content from the downloaded HTML file
         // first, process and delete mini file
         const miniHtmlContent = await processAndDeleteFile(miniHtmlPath);
@@ -235,7 +235,10 @@ async function main() {
     // add image and html file to repo
     await uploadFileToRepo('oscars47', 'math-zombies', htmlPath, 'added '+htmlName);
     await uploadFileToRepo('oscars47', 'math-zombies', imagePath, 'added '+imageName);
-
 }
+
+main().catch(error => {
+    console.error('Error in main function:', error);
+});
 
 main();
