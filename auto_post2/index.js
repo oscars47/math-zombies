@@ -1,25 +1,26 @@
 const net = require('net');
 const axios = require('axios');
-const fs = require('fs').promises;
+const fs = require('fs'); // Import standard fs for createWriteStream
+const fsPromises = fs.promises; // Continue using fs.promises for other async operations
 const simpleGit = require('simple-git');
 
 // Function to download a file
 async function downloadFile(url, path) {
-  const writer = fs.createWriteStream(path);
-
-  const response = await axios({
-    url,
-    method: 'GET',
-    responseType: 'stream'
-  });
-
-  response.data.pipe(writer);
-
-  return new Promise((resolve, reject) => {
-    writer.on('finish', resolve);
-    writer.on('error', reject);
-  });
-}
+    const writer = fs.createWriteStream(path);
+  
+    const response = await axios({
+      url,
+      method: 'GET',
+      responseType: 'stream'
+    });
+  
+    response.data.pipe(writer);
+  
+    return new Promise((resolve, reject) => {
+      writer.on('finish', resolve);
+      writer.on('error', reject);
+    });
+  }
 
 // Main function
 async function main(htmlUrl, miniHtmlUrl, imageUrl, htmlName, miniHtmlName, imageName) {
@@ -41,13 +42,13 @@ async function main(htmlUrl, miniHtmlUrl, imageUrl, htmlName, miniHtmlName, imag
     await git.commit('Add new files');
 
     console.log('Inserting miniHTML into target HTML file...');
-    const targetHtml = await fs.readFile('target.html', 'utf8');
-    const miniHtml = await fs.readFile(miniHtmlName, 'utf8');
+    const targetHtml = await fsPromises.readFile('target.html', 'utf8');
+    const miniHtml = await fsPromises.readFile(miniHtmlName, 'utf8');
     const updatedHtml = targetHtml.replace('<!-- ADD NEW POSTS HERE -->', '<!-- ADD NEW POSTS HERE -->\n' + miniHtml);
-    await fs.writeFile('target.html', updatedHtml);
+    await fsPromises.writeFile('target.html', updatedHtml);
 
     console.log('Deleting miniHTML file...');
-    await fs.unlink(miniHtmlName);
+    await fsPromises.unlink(miniHtmlName);
 
     console.log('Pushing changes to GitHub...');
     await git.push('origin', 'new-branch');
