@@ -3,6 +3,7 @@ const axios = require('axios');
 const fs = require('fs'); // Import standard fs for createWriteStream
 const fsp = fs.promises; // Continue using fs.promises for other async operations
 const simpleGit = require('simple-git');
+const { exec } = require('child_process');
 
 // Function to download a file
 async function downloadFile(url, path) {
@@ -21,6 +22,19 @@ async function downloadFile(url, path) {
       writer.on('error', reject);
     });
   }
+
+function execShellCommand(cmd) {
+    return new Promise((resolve, reject) => {
+      exec(cmd, (error, stdout, stderr) => {
+        if (error) {
+          console.warn(error);
+          reject(error);
+        }
+        resolve(stdout ? stdout : stderr);
+      });
+    });
+  }
+  
 
 // Main function
 async function main(htmlUrl, miniHtmlUrl, imageUrl, htmlName, miniHtmlName, imageName, summary) {
