@@ -51,6 +51,7 @@ async function createBranch(owner, repo, newBranchName, mainBranchName = 'main')
 const newBranchName = 'test';
 const user = 'oscars47';
 const repo = 'math-zombies';
+const email = 'orsa2020@mymail.pomona.edu';
 
 // ------- add HTTP endpoint so this file can be triggered by Google Apps Script ------- //
 const express = require('express');
@@ -166,12 +167,12 @@ async function updateGitHubFileWithHtmlContent(miniHtmlPath, owner, repo, target
                     content: contentBase64,
                     sha: fileSha,
                     committer: {
-                        name: 'Committer Name',
-                        email: 'committer-email@example.com'
+                        name: user,
+                        email: email
                     },
                     author: {
-                        name: 'Author Name',
-                        email: 'author-email@example.com'
+                        name: user,
+                        email: email
                     }
                 });
         
@@ -202,12 +203,12 @@ async function uploadFileToRepo(owner, repo, filePath, commitMessage, newBranchN
             message: commitMessage,
             content: content,
             committer: {
-                name: 'oscars47', // Replace with your name
-                email: 'orsa2020@mymail.pomona.edu' // Replace with your email
+                name: user, // Replace with your name
+                email: email // Replace with your email
             },
             author: {
-                name: 'oscars47', // Replace with your name
-                email: 'orsa2020@mymail.pomona.edu' // Replace with your email
+                name: user, // Replace with your name
+                email: email // Replace with your email
             }
         });
 
