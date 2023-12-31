@@ -176,6 +176,9 @@ async function main() {
     console.log('pulled from git')
 
     app.use(express.json());
+    app.listen(port, () => {
+        console.log(`Server running on port ${port}`);
+    });
     app.post('/process-data', async (req, res) => {
         try {
             const { htmlUrl, miniHtmlUrl, imageUrl, htmlName, miniHtmlName, imageName } = req.body;
@@ -219,11 +222,6 @@ async function main() {
             res.status(500).send('An error occurred');
         }
     });
-
-    app.listen(port, () => {
-        console.log(`Server running on port ${port}`);
-    });
-
 
     await createBranch(user, repo, newBranchName);
     console.log('created branch')
