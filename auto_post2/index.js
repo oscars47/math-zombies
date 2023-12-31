@@ -72,12 +72,9 @@ async function main(htmlUrl, miniHtmlUrl, imageUrl, htmlName, miniHtmlName, imag
     console.log('Adding files to the branch...');
     await git.add([htmlFileName, imageFileName]);
 
-    console.log('mini file:' + miniHtml)
-
     console.log('Inserting miniHTML into target HTML file...');
-    const targetHtml = await fsPromises.readFile('../posts.html', 'utf8');
     const miniHtml = await fsPromises.readFile(miniHtmlFileName, 'utf8');
-    const updatedHtml = targetHtml.replace('<!-- ADD NEW POSTS HERE -->', '<!-- ADD NEW POSTS HERE -->\n' + miniHtml);
+    console.log('mini file:' + miniHtml)
     
     function insertMiniHtml(targetHtmlPath, miniHtmlPath) {
         const fs = require('fs').promises;
