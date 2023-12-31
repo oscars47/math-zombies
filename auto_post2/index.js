@@ -106,7 +106,6 @@ async function main(htmlUrl, miniHtmlUrl, imageUrl, htmlName, miniHtmlName, imag
     console.log('Writing updated HTML file...');
     const updatedHtml = insertMiniHtml('../posts.html', miniHtmlFileName);    
     
-    await fsPromises.writeFile('../posts.html', updatedHtml);
     await git.add('../posts.html');
 
     console.log('Committing changes...');
