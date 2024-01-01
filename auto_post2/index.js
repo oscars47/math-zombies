@@ -120,12 +120,11 @@ async function main(htmlUrl, miniHtmlUrl, imageUrl, htmlName, miniHtmlName, imag
     await git.add([htmlFileName, imageFileName]);
 
     console.log('Inserting miniHTML into target HTML file...');
-    // const miniHtml = await fsp.readFile(miniHtmlFileName, 'utf8');
-    console.log('Mini html:');
-    console.log(await fsp.readFile(miniHtmlFileName, 'utf8'));
+    // console.log('Mini html:');
+    // console.log(await fsp.readFile(miniHtmlFileName, 'utf8'));
 
-    console.log('Target html before insertion:');
-    console.log(await fsp.readFile('../posts.html', 'utf8'));
+    // console.log('Target html before insertion:');
+    // console.log(await fsp.readFile('../posts.html', 'utf8'));
     
     function insertMiniHtml(targetHtmlPath, miniHtmlPath) {
         return fsp.readFile(targetHtmlPath, 'utf8')
@@ -153,8 +152,8 @@ async function main(htmlUrl, miniHtmlUrl, imageUrl, htmlName, miniHtmlName, imag
     console.log('Writing updated HTML file...');
     await insertMiniHtml('../posts.html', miniHtmlFileName); // need to wait to ensure the file is written before continuing    
 
-    console.log('Target html after insertion:');
-    console.log(await fsp.readFile('../posts.html', 'utf8'));
+    // console.log('Target html after insertion:');
+    // console.log(await fsp.readFile('../posts.html', 'utf8'));
     
     await git.add('../posts.html');
 
