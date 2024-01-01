@@ -74,16 +74,24 @@ async function main(htmlUrl, miniHtmlUrl, imageUrl, htmlName, miniHtmlName, imag
     const imageFileName = '../images/'+imageName
 
   try {
+
+    try{
+        console.log('Syncing to main...');
+        await execShellCommand('git fetch origin');
+        await execShellCommand('git reset --hard origin/main');
+        await execShellCommand('git checkout .');
+    }
+    catch (error) {
+        console.log('Error syncing to main');
+    }
+
+    // Download the files
     console.log('Downloading files...');
     await downloadFile(htmlUrl, htmlFileName);
     await downloadFile(miniHtmlUrl, miniHtmlFileName);
     await downloadFile(imageUrl, imageFileName);
 
-    console.log('HTML file downloaded to '+htmlFileName);
-    console.log('miniHTML file downloaded to '+miniHtmlFileName);
-    console.log('Image file downloaded to '+imageFileName);
-
-    // pull from master
+    // now pull from main
     console.log('Pulling from main...');
     try {
         await git.pull('origin', 'main');
@@ -99,6 +107,11 @@ async function main(htmlUrl, miniHtmlUrl, imageUrl, htmlName, miniHtmlName, imag
         await git.pull('origin', 'main');
     }
 
+    console.log('HTML file downloaded to '+htmlFileName);
+    console.log('miniHTML file downloaded to '+miniHtmlFileName);
+    console.log('Image file downloaded to '+imageFileName);
+
+    // Create a new branch
     console.log('Creating a new branch...');
     const newBranch = 'new-branch-'+Date.now();
     await git.checkoutLocalBranch(newBranch);
