@@ -129,31 +129,29 @@ async function main(htmlUrl, miniHtmlUrl, imageUrl, htmlName, miniHtmlName, imag
     
     function insertMiniHtml(targetHtmlPath, miniHtmlPath) {
         return fsp.readFile(targetHtmlPath, 'utf8')
-          .then(targetHtml => {
-            return fsp.readFile(miniHtmlPath, 'utf8')
-              .then(miniHtml => {
-                // Check if the marker exists in the target HTML
-                if (!targetHtml.includes('<!-- ADD NEW POSTS HERE -->')) {
-                  throw new Error('Marker not found in target HTML');
-                }
-      
-                // Replace the marker with marker + miniHtml
-                const updatedHtml = targetHtml.replace(
-                  '<!-- ADD NEW POSTS HERE -->',
-                  `<!-- ADD NEW POSTS HERE -->\n${miniHtml}`
-                );
-      
-                // Write the updated HTML back to the file
-                fsp.writeFile(targetHtmlPath, updatedHtml);
-              });
-          })
-          .catch(error => {
-            console.error('An error occurred:', error);
-          });
-      }
-
+            .then(targetHtml => {
+                return fsp.readFile(miniHtmlPath, 'utf8')
+                    .then(miniHtml => {
+                        if (!targetHtml.includes('<!-- ADD NEW POSTS HERE -->')) {
+                            throw new Error('Marker not found in target HTML');
+                        }
+    
+                        const updatedHtml = targetHtml.replace(
+                            '<!-- ADD NEW POSTS HERE -->',
+                            `<!-- ADD NEW POSTS HERE -->\n${miniHtml}`
+                        );
+    
+                        // Return the writeFile promise to ensure it completes before continuing
+                        return fsp.writeFile(targetHtmlPath, updatedHtml);
+                    });
+            })
+            .catch(error => {
+                console.error('An error occurred:', error);
+            });
+    }
+    
     console.log('Writing updated HTML file...');
-    insertMiniHtml('../posts.html', miniHtmlFileName);    
+    await insertMiniHtml('../posts.html', miniHtmlFileName); // need to wait to ensure the file is written before continuing    
 
     console.log('Target html after insertion:');
     console.log(await fsp.readFile('../posts.html', 'utf8'));
