@@ -121,6 +121,9 @@ async function main(htmlUrl, miniHtmlUrl, imageUrl, htmlName, miniHtmlName, imag
 
     console.log('Inserting miniHTML into target HTML file...');
     // const miniHtml = await fsp.readFile(miniHtmlFileName, 'utf8');
+
+    console.log('Target html before insertion:');
+    console.log(await fsp.readFile('../posts.html', 'utf8'));
     
     function insertMiniHtml(targetHtmlPath, miniHtmlPath) {
         return fsp.readFile(targetHtmlPath, 'utf8')
@@ -149,6 +152,9 @@ async function main(htmlUrl, miniHtmlUrl, imageUrl, htmlName, miniHtmlName, imag
 
     console.log('Writing updated HTML file...');
     insertMiniHtml('../posts.html', miniHtmlFileName);    
+
+    console.log('Target html after insertion:');
+    console.log(await fsp.readFile('../posts.html', 'utf8'));
     
     await git.add('../posts.html');
 
