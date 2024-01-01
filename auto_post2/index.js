@@ -121,6 +121,8 @@ async function main(htmlUrl, miniHtmlUrl, imageUrl, htmlName, miniHtmlName, imag
 
     console.log('Inserting miniHTML into target HTML file...');
     // const miniHtml = await fsp.readFile(miniHtmlFileName, 'utf8');
+    console.log('Mini html:');
+    console.log(await fsp.readFile(miniHtmlFileName, 'utf8'));
 
     console.log('Target html before insertion:');
     console.log(await fsp.readFile('../posts.html', 'utf8'));
