@@ -40,17 +40,17 @@ function execShellCommand(cmd) {
 async function main(htmlUrl, miniHtmlUrl, imageUrl, htmlName, miniHtmlName, imageName, summary) {
     // Initialize simple-git
     console.log('Initializing git at '+ Date.now() + '...');
-    const git = simpleGit({
-        baseDir: process.cwd(),
-        binary: 'git',
-        config: []
-    });
+    // const git = simpleGit({
+    //     baseDir: process.cwd(),
+    //     binary: 'git',
+    //     config: []
+    // });
     
-    const token = process.env.GITHUB_TOKEN; 
-    const repo = 'https://github.com/oscars47/math-zombies.git';
+    // const token = process.env.GITHUB_TOKEN; 
+    // const repo = 'https://github.com/oscars47/math-zombies.git';
     
     // Form the remote URL with the token
-    const remoteWithToken = `https://${token}:x-oauth-basic@${repo.replace('https://', '')}`;
+    // const remoteWithToken = `https://${token}:x-oauth-basic@${repo.replace('https://', '')}`;
     
     // try {
     //     // Check if the 'origin' remote already exists
@@ -69,29 +69,35 @@ async function main(htmlUrl, miniHtmlUrl, imageUrl, htmlName, miniHtmlName, imag
     //     console.error('Error:', error);
     // }    
 
-    // use SSH instead of HTTPS
+    // ------ use SSH instead of HTTPS ------
+    const simpleGit = require('simple-git');
+    const git = simpleGit();
+
+    const repo = 'git@github.com:oscars47/math-zombies.git';
+
     (async () => {
-      try {
-          // Check if the 'origin' remote already exists
-          const remotes = await git.getRemotes(true);
-          const originExists = remotes.some(remote => remote.name === 'origin');
-  
-          if (originExists) {
-              // Update the existing 'origin' remote
-              await git.remote(['set-url', 'origin', repo]);
-          } else {
-              // Add 'origin' remote if it doesn't exist
-              await git.addRemote('origin', repo);
-          }
-  
-          // Add, commit, and push changes
-          await git.add('./*');
-          await git.commit('Automated commit');
-          await git.push('origin', 'main');
-      } catch (err) {
-          console.error('An error occurred:', err);
-      }
-  })();
+        try {
+            // Check if the 'origin' remote already exists
+            const remotes = await git.getRemotes(true);
+            const originExists = remotes.some(remote => remote.name === 'origin');
+
+            if (originExists) {
+                // Update the existing 'origin' remote
+                await git.remote(['set-url', 'origin', repo]);
+            } else {
+                // Add 'origin' remote if it doesn't exist
+                await git.addRemote('origin', repo);
+            }
+
+            // Add, commit, and push changes
+            await git.add('./*');
+            await git.commit('Automated commit');
+            await git.push('origin', 'main');
+        } catch (err) {
+            console.error('An error occurred:', err);
+        }
+    })();
+    
 
     const htmlFileName = '../post_files/'+htmlName+'.html'
     const miniHtmlFileName = '../post_files/'+miniHtmlName
@@ -230,6 +236,6 @@ const server = net.createServer((socket) => {
   server.listen(8080, () => {
     console.log('Server listening on port 8080');
     console.log('+---------------+')
-    console.log('+ version 0.0.7 +')
+    console.log('+ version 0.0.8 +')
     console.log('+---------------+')
   });
