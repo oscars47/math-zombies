@@ -52,22 +52,46 @@ async function main(htmlUrl, miniHtmlUrl, imageUrl, htmlName, miniHtmlName, imag
     // Form the remote URL with the token
     const remoteWithToken = `https://${token}:x-oauth-basic@${repo.replace('https://', '')}`;
     
-    try {
-        // Check if the 'origin' remote already exists
-        const remotes = await git.getRemotes(true);
-        const originExists = remotes.some(remote => remote.name === 'origin');
+    // try {
+    //     // Check if the 'origin' remote already exists
+    //     const remotes = await git.getRemotes(true);
+    //     const originExists = remotes.some(remote => remote.name === 'origin');
     
-        if (originExists) {
-            // Update the existing 'origin' remote
-            await git.remote(['set-url', 'origin', remoteWithToken]);
-        } else {
-            // Add 'origin' remote if it doesn't exist
-            await git.addRemote('origin', remoteWithToken);
-        }
+    //     if (originExists) {
+    //         // Update the existing 'origin' remote
+    //         await git.remote(['set-url', 'origin', remoteWithToken]);
+    //     } else {
+    //         // Add 'origin' remote if it doesn't exist
+    //         await git.addRemote('origin', remoteWithToken);
+    //     }
     
-    } catch (error) {
-        console.error('Error:', error);
-    }    
+    // } catch (error) {
+    //     console.error('Error:', error);
+    // }    
+
+    // use SSH instead of HTTPS
+    (async () => {
+      try {
+          // Check if the 'origin' remote already exists
+          const remotes = await git.getRemotes(true);
+          const originExists = remotes.some(remote => remote.name === 'origin');
+  
+          if (originExists) {
+              // Update the existing 'origin' remote
+              await git.remote(['set-url', 'origin', repo]);
+          } else {
+              // Add 'origin' remote if it doesn't exist
+              await git.addRemote('origin', repo);
+          }
+  
+          // Add, commit, and push changes
+          await git.add('./*');
+          await git.commit('Automated commit');
+          await git.push('origin', 'main');
+      } catch (err) {
+          console.error('An error occurred:', err);
+      }
+  })();
 
     const htmlFileName = '../post_files/'+htmlName+'.html'
     const miniHtmlFileName = '../post_files/'+miniHtmlName
