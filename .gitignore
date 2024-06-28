@@ -3,3 +3,4 @@ auto_post/hello.pem
 .DS_Store
 _site/
 node_modules
+auto_post2/client.js
