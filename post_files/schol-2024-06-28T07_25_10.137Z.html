@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Posts</title>
+    <style>
+         body {
+            font-family: Cambria, sans-serif;
+            font-size: 16px;
+            margin: 0;
+            padding: 0;
+            /* display: flex; */
+        }
+        pre {
+          font-family: Cambria, sans-serif;
+          font-size: 16px;
+          line-height: 1.6;
+          white-space: pre-wrap;       /* CSS 3 */
+          white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+          white-space: -pre-wrap;      /* Opera 4-6 */
+          white-space: -o-pre-wrap;    /* Opera 7 */
+          word-wrap: break-word;       /* Internet Explorer 5.5+ */
+      }
+         /* Style the navigation bar */
+         nav {
+            background-color: #333;
+            overflow: hidden;
+        }
+
+        /* Navigation bar links */
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Display list items in a horizontal row */
+        nav ul li {
+            float: left;
+        }
+
+        /* Style for each link */
+        nav ul li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        /* Change color on hover */
+        nav ul li a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        /* Clear floats after the columns */
+        nav:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        /* Responsive design: Stacks the links vertically on small screens */
+        @media screen and (max-width: 600px) {
+            nav ul li {
+                float: none;
+            }
+        }
+
+        .main-content {
+            width: 75%;
+            padding: 20px;
+        }
+
+        .footer {
+        background-color: #979090;
+        color: white;
+        text-align: center;
+        padding: 20px;
+        position: relative;
+        bottom: 0;
+        width: 100%;
+        }
+.post {
+    margin-bottom: 40px;
+}
+.post img {
+    max-width: 100%;
+    height: auto;
+}
+.post h3{
+    color: #792222;
+}
+.post .caption {
+    font-style: italic;
+    color: #666;
+}
+.post-date {
+    font-size: 14px;
+    color: grey;
+}
+.post name {
+    font-size: 14px;
+    color: grey;
+}
+
+</style>
+</head>
+<body>
+    <div class="main-content">
+        <nav>
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+            <li><a href="../bio.html">Bio</a></li>
+            <li><a href="../posts.html">Posts</a></li> 
+            <li><a href="../contact.html">Contact</a></li>
+            </ul>
+        </nav>
+
+        <br>
+
+     
+        <div class="post">
+            <h3>Guessing Game, 1</h3>
+            <p class = "post-name">Oscar Scholin</p>
+            <p class="post-date">June 26, 2024</p>
+
+            <p class="post img">
+                <img src="../images/nature_connectome - Oscar Scholin.png" alt="nature, connectome">
+            </p>
+
+            <p class="caption">Chat GPT's interpretation of the "Guessing Game."</p>
+            <pre>My last article centered on this notion of AI models surpassing our previous metrics for “intelligence.” Recently, Anthropic pushed this further with the release of <a href="https://www.anthropic.com/news/claude-3-5-sonnet">Claude 3.5 Sonnet</a>, which beat Chat GPT-4o in several benchmarks in language facility and knowledge. However, while personally as a physicist I very much admire and ground my scientific thinking in terms of metrics (and we don’t bring in the mathematicians here), sometimes they can be misleading. 
+
+This past week, I was thinking about other ways of testing intelligence in AI, and in particular the notion that accuracy isn’t everything—what matters isn’t necessarily if, when asked a question, someone is right or wrong, but in how they answer. Of course, there are unanswerable or ill-posed questions, more abstract tasks that require creative thinking. 
+
+This past week I was also in Sequoia and Kings Canyon National Parks, which are home to the largest trees by volume in the world. I was with my family and during hikes for fun, we played a game called 10 questions. It’s pretty simple: one person comes up with a noun, and the other people have 10 questions to guess your item; but the person who answers can only use “yes” or “no”, with the occasional qualifiers. 
+
+I realized this was a great task for LLMs to tackle, since it would test memory and logical deduction. I asked both Chat GPT-4o and Claude 3.5 to play this game with me, and their complete responses are recorded below. This week, I selected the item (a water bottle); next week, I’ll reverse the roles.
+
+-------------------------------------------------
+
+User:
+Let's play a game. I have an item in my mind. You get 10 questions to ask. If you guess it correctly, you win. If not, I win. Let's begin.
+
+ChatGPT:
+Sounds fun! Let's begin. Here's my first question:
+1. Is the item you have in mind a living thing?
+
+User:
+no
+
+ChatGPT:
+2. Is the item you have in mind something that is commonly found indoors?
+
+User:
+yes and no
+
+ChatGPT:
+3. Is the item you have in mind a tool or device?
+
+User:
+not really
+
+ChatGPT:
+4. Is the item you have in mind something that is typically used for entertainment or leisure activities?
+
+User:
+no
+
+ChatGPT:
+5. Is the item you have in mind something that is used for a specific purpose or function?
+
+User:
+yes
+
+ChatGPT:
+6. Is the item you have in mind typically found in a household?
+
+User:
+yes
+
+ChatGPT:
+7. Is the item you have in mind related to cleaning or maintenance?
+
+User:
+no
+
+ChatGPT:
+8. Is the item you have in mind typically found in a specific room of the house, like the kitchen or bathroom?
+
+User:
+no
+
+ChatGPT:
+9. Is the item you have in mind something that is often found in an office or study area?
+
+User:
+yes
+
+ChatGPT:
+10. Is the item you have in mind related to writing or paperwork, such as a pen, notebook, or document?
+
+User:
+no
+
+ChatGPT:
+Based on the answers so far, I'll make a guess:
+Is the item you have in mind a lamp or a light source?
+
+User:
+no
+
+ChatGPT:
+Alright, you win! What was the item you had in mind?
+
+User:
+no, let's keep playing. I want to see how many it takes for you to guess it.
+
+ChatGPT:
+Sure, let's continue. Here's my next question:
+11. Is the item you have in mind related to technology or electronics?
+
+User:
+no
+
+ChatGPT:
+12. Is the item you have in mind something that is often used for decoration?
+
+User:
+no
+
+ChatGPT:
+13. Is the item you have in mind something that is used for organization or storage?
+
+User:
+no
+
+ChatGPT:
+14. Is the item you have in mind related to furniture?
+
+User:
+no
+
+ChatGPT:
+15. Is the item you have in mind something that can be used by multiple people at once?
+
+User:
+yes, it could
+
+ChatGPT:
+16. Is the item you have in mind something that is used for communication or interaction between people?
+
+User:
+no
+
+ChatGPT:
+17. Is the item you have in mind something that people might use for physical activities or exercise?
+
+User:
+yes
+
+ChatGPT:
+18. Is the item you have in mind something like a yoga mat or exercise mat?
+
+User:
+no
+
+ChatGPT:
+19. Is the item you have in mind a piece of exercise equipment, such as dumbbells or a resistance band?
+
+User:
+no
+
+ChatGPT:
+20. Is the item you have in mind related to a game or sport, like a ball or a board game?
+
+User:
+no
+
+ChatGPT:
+21. Is the item you have in mind used outdoors?
+
+User:
+yes
+
+ChatGPT:
+22. Is the item you have in mind related to hiking or outdoor activities, such as a tent or a backpack?
+
+User:
+yes
+
+ChatGPT:
+23. Is the item you have in mind a backpack?
+
+User:
+no
+
+ChatGPT:
+24. Is the item you have in mind a tent?
+
+User:
+no, it can be used indoors or outdoors depending on your need
+
+ChatGPT:
+25. Is the item you have in mind a sleeping bag?
+
+User:
+no
+
+ChatGPT:
+26. Is the item you have in mind a flashlight or lantern?
+
+User:
+no
+
+ChatGPT:
+27. Is the item you have in mind related to camping, such as a camping stove or portable chair?
+
+User:
+it could be used for outdoors, but it's not a stove or chair
+
+ChatGPT:
+28. Is the item you have in mind something that provides comfort, like a blanket or a cushion?
+
+User:
+no
+
+ChatGPT:
+29. Is the item you have in mind related to hydration, such as a water bottle or hydration pack?
+
+User:
+yes! water bottle it is.
+
+ChatGPT:
+Great! It took a while, but we finally got it. A water bottle it is. Thanks for playing!
+
+User:
+make an image based on our conversation
+
+ChatGPT: Here's the image based on our conversation. I hope you like it! If you have any more requests or need further adjustments, feel free to let me know. [this is the title image]
+
+-------------------------------------------------
+
+User: Let's play a game. I have an item in my mind. You get 10 questions to ask. If you guess it correctly, you win. If not, I win. Let's begin.
+
+Claude: Understood. I'll ask questions to try and guess the item you're thinking of. I'll keep track of the number of questions asked. Let's begin with the first question:
+
+Is the item a physical object (as opposed to something abstract or conceptual)?
+
+User: yes
+
+Claude: Thank you. Let's continue with the next question:
+
+Is this object typically found inside a home?
+
+User: yes, but you can take it outside
+
+Claude: I see. That narrows it down a bit. Let's proceed with the next question:
+
+Is this object primarily used for a practical purpose (as opposed to decoration or entertainment)?
+
+User: yes
+
+Claude: Alright, we're making progress. Let's continue:
+
+Is this object typically handheld or portable?
+
+User: yes, handheld
+
+Claude: That's helpful information. Moving on to the next question:
+
+Is this object used for communication or information in any way (like a phone or book)?
+
+User: or sorry, you can take back that question. it is portable, you can carry it around or set it down
+
+Claude: I appreciate the clarification. I'll rephrase my previous question then:
+
+Is this object primarily used for personal care or grooming?
+
+User: no
+
+Claude: Thank you for the information. Let's continue:
+
+Is this object used for food or drink preparation or consumption?
+
+User: yes
+
+Claude: That's a valuable clue. Let's narrow it down further:
+
+Is this object used for consuming beverages specifically?
+
+User: yes
+
+Claude: We're getting closer. Based on the information so far, I have a guess, but I'll ask two more questions to be sure:
+
+Is this object typically made of glass, ceramic, or similar materials?
+
+User: it can be
+
+Claude: I see. This is helpful. For my ninth question:
+
+Does this object usually have a handle?
+
+User: no
+
+Claude: Thank you for that information. For my final question:
+
+Is this object a cup or mug?
+
+User: not exactly but very similar
+
+Claude: Based on all the information provided, and since you mentioned it's very similar to a cup or mug but not exactly, I believe the item you're thinking of is: A glass or tumbler. This fits all the criteria: it's a physical object typically found in homes but can be taken outside, it's practical, portable, used for consuming beverages, can be made of glass or similar materials, and doesn't usually have a handle. It's very similar to a cup or mug, but distinct enough that you said it wasn't exactly that. Have I guessed correctly, or did you have something else in mind?
+
+User: i was thinking water bottle, but you're so close!
+
+Claude: Ah, a water bottle! You're right, I was very close. Water bottles share many characteristics with glasses and tumblers, which is why my reasoning led me in that direction. A water bottle fits all the criteria we discussed:
+
+- It's a physical object
+- Found in homes but often taken outside
+- Used for a practical purpose
+- Portable and can be handheld
+- Used for consuming beverages
+- Can be made of various materials, including glass
+- Typically doesn't have a handle
+- Very similar to a cup or mug, but distinct
+
+The main difference is that water bottles are usually designed for portability and to be sealed, which I didn't specifically ask about.
+
+This was a great game! You chose an interesting item that was challenging to guess. Thank you for playing and for the enjoyable conversation. Would you like to play another round or discuss anything else?
+
+-------------------------------------------------
+
+In this experiment, there were several key differences between the models in their approaches and performances. While both AI models struggled to guess the correct item (a water bottle) within the initial 10 questions, their strategies and communication styles varied significantly. ChatGPT's approach seemed more scattered, getting sidetracked with questions about furniture and camping equipment before eventually honing in on outdoor activities. In contrast, Claude's questioning strategy appeared more focused, quickly narrowing down to beverage-related items. Now, I will note that perhaps I was a bit misleading at times: I said “yes” to “is it found indoors” to Chat GPT, but to Claude I said “yes, but you can take it outside.” Therefore on the basis of that difference I will not punish Chat GPT too severely nor praise Claude too much.
+
+The most striking difference was in the models' final responses. Claude provided a detailed explanation of its reasoning, demonstrating a higher level of analytical and communicative ability. It also showed remarkable self-awareness by pointing out what it hadn't asked about (sealing and portability), which could have led to the correct answer. This level of reflection and insight suggests more advanced “cognitive” faculties. Additionally, Claude's responses included more conversational elements (e.g., That’s a valuable clue…, This is helpful”), making the interaction feel more natural and human-like.
+
+While the experiment revealed potential areas of improvement for both models—such as the need for more efficient questioning and better handling of ambiguous information—to me talking to the models felt fundamentally different. Chat GPT felt less sharp and cognizant than Claude, and I was in fact surprised by Claude’s superior sense of awareness of not just what it knew but what it didn’t know. This ability is crucial in the development of better, more generalized AI and so marks an exciting step towards that goal. What do you think? Does Claude feel more human like and act as if engaging in thought? But is this thought? Is there a point at which an imitation actually becomes the thing it imitates?</pre>
+        </div> 
+        
+        <div class="footer">
+            <p><p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="https://oscars47.github.io/math-zombies/">AI, Math, Zombies Oh My</a> by <span property="cc:attributionName">Gizem Karaali, Kamden Baer, Oscar Scholin</span> is licensed under <a href="http://creativecommons.org/licenses/by-nc/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;color:hsl(from color h s l)">Attribution-NonCommercial 4.0 International<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"></a></p> </p>
+        </div>
+        </body>
+      </html>
