@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Posts</title>
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.1.2/es5/tex-mml-chtml.js">
+    </script>
+    <style>
+         body {
+            font-family: Cambria, sans-serif;
+            font-size: 16px;
+            margin: 0;
+            padding: 0;
+            /* display: flex; */
+        }
+        pre {
+          font-family: Cambria, sans-serif;
+          font-size: 16px;
+          line-height: 1.6;
+          white-space: pre-wrap;       /* CSS 3 */
+          white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+          white-space: -pre-wrap;      /* Opera 4-6 */
+          white-space: -o-pre-wrap;    /* Opera 7 */
+          word-wrap: break-word;       /* Internet Explorer 5.5+ */
+      }
+         /* Style the navigation bar */
+         nav {
+            background-color: #333;
+            overflow: hidden;
+        }
+
+        /* Navigation bar links */
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Display list items in a horizontal row */
+        nav ul li {
+            float: left;
+        }
+
+        /* Style for each link */
+        nav ul li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        /* Change color on hover */
+        nav ul li a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        /* Clear floats after the columns */
+        nav:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        /* Responsive design: Stacks the links vertically on small screens */
+        @media screen and (max-width: 600px) {
+            nav ul li {
+                float: none;
+            }
+        }
+
+        .main-content {
+            width: 75%;
+            padding: 20px;
+        }
+
+        .footer {
+        background-color: #979090;
+        color: white;
+        text-align: center;
+        padding: 20px;
+        position: relative;
+        bottom: 0;
+        width: 100%;
+        }
+.post {
+    margin-bottom: 40px;
+}
+.post img {
+    max-width: 100%;
+    height: auto;
+}
+.post fig{
+    max-width: 20%;
+    height: auto;
+}
+.post figcaption {
+    font-style: italic;
+    color: #666;
+    width: 20%;
+}
+.post h3{
+    color: #792222;
+}
+.post .caption {
+    font-style: italic;
+    color: #666;
+}
+.post-date {
+    font-size: 14px;
+    color: grey;
+}
+.post name {
+    font-size: 14px;
+    color: grey;
+}
+
+</style>
+</head>
+<body>
+    <div class="main-content">
+        <nav>
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+            <li><a href="../bio.html">Bio</a></li>
+            <li><a href="../posts.html">Posts</a></li> 
+            <li><a href="../contact.html">Contact</a></li>
+            </ul>
+        </nav>
+
+        <br>
+
+     
+        <div class="post">
+            <h3>Golden Geometry: Chat GPT Doing Math</h3>
+            <p class = "post-name">Oscar Scholin</p>
+            <p class="post-date">July 3, 2024</p>
+
+            <p class="post img">
+                <img src="../images/pentagon - Oscar Scholin.png" alt="pentagon within pentagon">
+            </p>
+
+            <p class="caption">Chat GPT-4o's interpretation of the math problem I gave it.</p>
+            <pre>Admittedly, it’s been a while since high school geometry. However, now that I have years more mathematical experience under my belt, it’s always fun to think about these kinds of problems in a new light. I came across one particular problem from my mom who was tutoring a high schooler in a summer geometry class, which I found interesting. I wondered how Chat GPT-4o would solve it. How would it approach it?
+
+I took my mom’s photo (shown below), which is a less than great quality shot (I mean no disrespect, mom, only to emphasize that it is not an optimal starting point for the model). It is a a blurry photo showing two math problems with schematics, as well as the Mac OS desktop bar and part of the chassis. Even I have a hard time reading this image unless I zoom in.
+
+<p class="post fig">
+                <img src="images/[insert img]" alt="snapshot of math problem">
+            </p>
+            <p class="post figcaption">Photo from my mom’s phone of the math problem in question that I submitted to Chat GPT-4o.</p>
+
+I sent this image to Chat GPT and simply said, “Solve problem 10.” I gave it no description of the problem other than this image.
+
+For the benefit of the reader, Problem 10 asks: “The length of a diagonal of a regular pentagon is 10 (shown below). Find the perimeter of the pentagon formed by joining consecutive midpoints of the sides of the given regular pentagon.” 
+
+It (I almost want to say they) does an excellent job understanding the problem statement, which is an achievement in itself. It clearly denotes what it is given and what the desired quantity is. The initial attempt starts great, making use of the fact the ratio of the diagonal to the side of a pentagon is the golden ratio, phi. I did not remember this property of the pentagon, so it was a curiosity to find phi suddenly appear—math has this way about it where concepts we are used to thinking about in one area crop up in another, and it’s such a delight. (If you want to learn more about pentagons, check out this <a href = “https://mathworld.wolfram.com/RegularPentagon.html”> Wolfram link</a>). 
+
+So using this relationship, Chat GPT is able to obtain the side length s from d. However, it makes a mistake in the next step: it assumes the side length s’ = s/2. It is consistent with its logic after this point and correct in its arithmetic.
+
+When I asked why it thought the new side length was half the original, it said “side length of the new pentagon …  is not simply half the side length of the original pentagon,” contradicting itself. It then states that s’ = cos(36 degrees) * s, where cos(36 degrees) is approximately 0.809 (which is correct). Then s’ is approximately 5. So the true new perimeter should be 5*5 = 25. 
+
+When asked to explain why the cosine of 36 degrees and why s’ = s * cos(36 degrees), it correctly explained that since there are 540 degrees in a pentagon (using (n-2)*180), the interior angle for each vertex must be 108 degrees. Therefore, the base angles must be 36 degrees each to preserve 180 degrees for a triangle. All good so far. However, it is vague about why the exact relationship is s’ = s cos(36 degrees), simply citing “When we connect the midpoints of the sides of the original pentagon, we create new segments that form the sides of a smaller pentagon. The cosine of 36 degrees (approximately 0.809) is crucial in understanding the side length relationship between the original and new pentagon.”
+
+The reason is because the sides of the isosceles triangle are s/2, s/2, and s’ as the base. Therefore when we cut the isosceles in half to get a right triangle and use cosine, the factors of ½ disappear and leave us with s’ = s * cos(36 degrees). A common misunderstanding for students, however, could be to neglect the factor of ½ on the two equal sides and in so doing end up with s’ = 2 *s * cos(36 degrees), leading to the insensible result that the new pentagon has a larger perimeter than the original! 
+
+So I asserted that  s’ = 2 *s * cos(36 degrees) and wanted to see how it would react. Chat GPT actually believed me, yet when it continued its math to find the perimeter it still used s’ = s *cos(36 degrees). So it simultaneously asserted s’ = 2 *s * cos(36 degrees) but correctly used s’ = s *cos(36 degrees).
+
+To go back to the initial surprising aspect about this problem for me, I asked Chat GPT why d/s = phi for the pentagon. It said that this was “fundamental property of the regular pentagon and its diagonals” and hinted about some business with cosine. I asked it for a more rigorous proof, and it correctly used the Law of Cosines. 
+
+Therefore while Chat GPT demonstrates an exceptional ability to read images, understand the problem presented, and make use of fundamental geometric ideas, it lacks the “moral thinking” of Chomsky. When I asserted a falsehood, it believed me, but then persisted with its own correct answer—after initially being wrong and corrected by me. This to me reflects my own practical usage of it mainly as a coding assistant. It can be quite helpful at inspiring or helping connect logical dots, but sometimes it gets a little lost in the weeds—hence why understanding coding or trigonometry is still very valid. It can still, thus, demonstrate intelligence even if it is wrong in some parts.
+
+What do you think? Was this a good problem to test?
+
+An edited transcript follows, formatted with the help of Claude 3.5 Sonnet.
+
+---------------------------------------------------- 
+</pre>
+        </div> 
+        
+        <div class="footer">
+            <p><p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="https://oscars47.github.io/math-zombies/">AI, Math, Zombies Oh My</a> by <span property="cc:attributionName">Gizem Karaali, Kamden Baer, Oscar Scholin</span> is licensed under <a href="http://creativecommons.org/licenses/by-nc/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;color:hsl(from color h s l)">Attribution-NonCommercial 4.0 International<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"></a></p> </p>
+        </div>
+        </body>
+      </html>
