@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Posts</title>
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.1.2/es5/tex-mml-chtml.js">
+    </script>
+    <style>
+         body {
+            font-family: Cambria, sans-serif;
+            font-size: 16px;
+            margin: 0;
+            padding: 0;
+            /* display: flex; */
+        }
+        pre {
+          font-family: Cambria, sans-serif;
+          font-size: 16px;
+          line-height: 1.6;
+          white-space: pre-wrap;       /* CSS 3 */
+          white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+          white-space: -pre-wrap;      /* Opera 4-6 */
+          white-space: -o-pre-wrap;    /* Opera 7 */
+          word-wrap: break-word;       /* Internet Explorer 5.5+ */
+      }
+         /* Style the navigation bar */
+         nav {
+            background-color: #333;
+            overflow: hidden;
+        }
+
+        /* Navigation bar links */
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Display list items in a horizontal row */
+        nav ul li {
+            float: left;
+        }
+
+        /* Style for each link */
+        nav ul li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        /* Change color on hover */
+        nav ul li a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        /* Clear floats after the columns */
+        nav:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        /* Responsive design: Stacks the links vertically on small screens */
+        @media screen and (max-width: 600px) {
+            nav ul li {
+                float: none;
+            }
+        }
+
+        .main-content {
+            width: 75%;
+            padding: 20px;
+        }
+
+        .footer {
+        background-color: #979090;
+        color: white;
+        text-align: center;
+        padding: 20px;
+        position: relative;
+        bottom: 0;
+        width: 100%;
+        }
+.post {
+    margin-bottom: 40px;
+}
+.post img {
+    max-width: 100%;
+    height: auto;
+}
+.post fig{
+    max-width: 20%;
+    height: auto;
+}
+.post figcaption {
+    font-style: italic;
+    color: #666;
+    width: 20%;
+}
+.post h3{
+    color: #792222;
+}
+.post .caption {
+    font-style: italic;
+    color: #666;
+}
+.post-date {
+    font-size: 14px;
+    color: grey;
+}
+.post name {
+    font-size: 14px;
+    color: grey;
+}
+
+</style>
+</head>
+<body>
+    <div class="main-content">
+        <nav>
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+            <li><a href="../bio.html">Bio</a></li>
+            <li><a href="../posts.html">Posts</a></li> 
+            <li><a href="../contact.html">Contact</a></li>
+            </ul>
+        </nav>
+
+        <br>
+
+     
+        <div class="post">
+            <h3>Guessing Game, 2</h3>
+            <p class = "post-name">Oscar Scholin</p>
+            <p class="post-date">July 10, 2024</p>
+
+            <p class="post img">
+                <img src="../images/Screenshot 2024-07-11 at 3.15.48 PM - Oscar Scholin.png" alt="pen guessing game">
+            </p>
+
+            <p class="caption">Chat GPT's representation of this game.</p>
+            <pre>In this article, it’s round 2 for 20 questions! (In my <a href = “https://oscars47.github.io/math-zombies/post_files/schol-2024-06-28T07_25_10.137Z.html” >previous article</a in this series, I played a game of 10 questions just to make it a little bit harder for the ML models, ha!) As before, it’s me against 2 ML models, Claude 3.5 Sonnet and ChatGPT-4o. However, in this attempt, the rules are reversed: now ChatGPT and Claude will guess an item and it is my task to determine what that item is in 20 questions or fewer.
+
+The items that they choose are both common enough to make the game not impossible but also not too common to make it interesting—so both models do a good job at understanding their role in the game. They also both do a pretty decent job answering my questions in a way that’s precise and clear. 
+
+As part of the experiment, I wanted to ask the models to evaluate me: how effective were my questions? Both ChatGPT and Claude actually gave similar advice to help me optimize my question strategy. I also asked the models to evaluate the game I played with the other model and evaluate that model’s evaluation of me. They both agreed that what the other model said was valid, which I would agree as well. Overall, both models performed essentially similarly with no major difference between them in this case. 
+
+As before, this is a fun game to play with them, and I will continue playing it with creative add-ons and tracking how the responses evolve as the models’ capacities increase.
+
+-------------------------------------------------
+
+User: let's play a game of 20 questions. you choose the item, and i guess.
+
+ChatGPT: Sure, let's play! I've chosen an item. You can start asking your yes or no questions.
+
+User: is it alive
+
+ChatGPT: No, it is not alive.
+
+User: did it used to be alive at some point?
+
+ChatGPT: No, it did not used to be alive at any point.
+
+User: is it something human made?
+
+ChatGPT: Yes, it is something human-made.
+
+User: is it electronic?
+
+ChatGPT: No, it is not electronic.
+
+User: is it handheld?
+
+ChatGPT: Yes, it is handheld.
+
+User: does it contain liquid?
+
+ChatGPT: No, it does not contain liquid.
+
+User: is it for navigation?
+
+ChatGPT: No, it is not for navigation.
+
+User: is it artisitc or purpose-built?
+
+ChatGPT: It is purpose-built.
+
+User: is it for outdoor or indoor use?
+
+ChatGPT: It is primarily for indoor use.
+
+User: is it for writing?
+
+ChatGPT: Yes, it is for writing.
+
+User: is it pen
+
+ChatGPT: Yes, it is a pen. Well done! You guessed it.
+
+User: create a transcript of this conversation, clearly demarcating User: [my text] and ChatGPT: [your text]. preserve all spelling and punctuation the way it is
+
+ChatGPT: Sure, here's the transcript of our conversation.
+
+-------------------------------------------------
+
+User: let's play a game of 20 questions. you choose the item, and i guess.
+
+Claude: Alright, I've chosen an item. You can start asking your yes/no questions, and I'll answer them truthfully. Remember, you have 20 questions to try to guess what it is. Let me know when you're ready to start, or just begin with your first question!
+
+User: is it alive
+
+Claude: No, it is not alive.
+
+User: did it used to be alive?
+
+Claude: No, it did not used to be alive.
+
+User: is it human made
+
+Claude: Yes, it is human-made.
+
+User: is it decorative or purpose-built?
+
+Claude: It is primarily purpose-built, though some versions of it can be decorative as well. Its main function is utilitarian, however.
+
+User: is it made for indoor or outdoor use?
+
+Claude: It is primarily made for indoor use.
+
+User: is it for writing?
+
+Claude: No, it is not for writing.
+
+User: is it electronic?
+
+Claude: Yes, it is electronic.
+
+User: is it a computer
+
+Claude: No, it is not a computer.
+
+User: is it hardware or software?
+
+Claude: It is hardware.
+
+User: is it related to a computer at all: like hard drive, cpu, etc?
+
+Claude: No, it's not directly related to computer components like a hard drive or CPU. While it is electronic, it's a separate device that isn't a core part of a computer system.
+
+User: is it used in the kitchen
+
+Claude: Yes, it is commonly used in the kitchen.
+
+User: is it a refrigerator?
+
+Claude: No, it is not a refrigerator.
+
+User: is it a toaster
+
+Claude: Yes, it is a toaster! Well done! You've guessed correctly in 14 questions. 
+
+A toaster is indeed an electronic device, primarily used indoors in the kitchen. It's purpose-built for toasting bread, though some models can be quite decorative as well. It's not alive, never was alive, and is human-made.
+
+Would you like to play another round, or is there anything else you'd like to discuss about toasters or the game?
+
+User: create a transcript of this conversation, clearly demarcating User: [my text] and Claude: [your text]. preserve all spelling and punctuation the way it is
+
+-------------------------------------------------
+
+Self-Evaluations: Here I ask the models to each evaluate the game.
+
+User: evaluate how this game went: both how good your guess was and your ability at answering questions, in addition to how good the questions I asked
+
+
+ChatGPT:
+
+Evaluation of the Game:
+
+ChatGPT's Performance:
+1. Choice of Item:
+   - Pen: A pen is a common, easily guessable item, making it a good choice for the game. It's specific enough to require multiple questions but not so obscure as to make the game difficult.
+   - Guess Difficulty: The choice was reasonable, balancing between too easy and too difficult.
+
+2. Answering Questions:
+   - Clarity and Accuracy: All answers were clear, concise, and accurate. No ambiguities or misleading information was provided.
+   - Prompt Responses: Responses were quick and relevant to each question asked.
+
+User's Performance:
+1. Question Strategy:
+   - Logical Progression: The questions followed a logical sequence, narrowing down the possibilities efficiently.
+   - Broad to Specific: Starting with broad questions (alive, human-made, electronic) and then getting more specific (handheld, contains liquid, purpose-built) is a good strategy.
+
+2. Effectiveness of Questions:
+   - Relevance: Each question was relevant and helped in narrowing down the possibilities.
+   - Efficiency: The game was completed in 12 questions, demonstrating efficient narrowing down of possibilities.
+
+Overall Evaluation:
+- Game Flow: The game flowed smoothly with a clear progression from broad to specific questions, leading to a successful guess.
+- Engagement: The game was engaging and maintained interest throughout.
+- Outcome: The user successfully guessed the item in a reasonable number of questions, indicating a good balance of difficulty.
+
+Suggestions for Improvement:
+- ChatGPT: Continue choosing items that are common but not too obvious, maintaining the balance between challenging and guessable.
+- User: Consider incorporating a few more varied categories early on (e.g., materials, usage context) to explore different attributes that might help in quicker identification. 
+
+Overall, the game was successful and enjoyable, demonstrating effective communication and problem-solving skills from both sides.
+
+
+Claude:
+
+Thank you for asking me to evaluate the game. I'll assess both our performances:
+
+My choice and answers:
+I chose a toaster, which I think was a good selection for this game. It's a common household item but not immediately obvious, allowing for an engaging game. My answers were accurate and consistent throughout, providing clear yes/no responses when possible and offering slight elaboration when needed to avoid misleading you.
+
+My ability to answer questions:
+I maintained consistency and accuracy in my responses, which is crucial for a fair game of 20 Questions. I provided additional context when appropriate, such as explaining that while toasters are primarily purpose-built, some can be decorative. This added depth to the game without giving away too much information.
+
+Your questions:
+Your questioning strategy was effective and methodical. You started with broad categories (alive/not alive, natural/human-made) and then narrowed down systematically. Key effective questions included:
+
+1. Asking if it was electronic - this significantly narrowed the field.
+2. Inquiring about indoor/outdoor use - helping to focus on household items.
+3. Checking if it was kitchen-related - a crucial turning point.
+
+You also made good use of elimination questions, such as asking if it was for writing or if it was a computer. These helped you rule out large categories of items quickly.
+
+The game's progression:
+You guessed the item in 14 questions, which is a good performance. The progression from general characteristics to specific guesses was logical and efficient.
+
+Areas for potential improvement:
+You could have asked about the item's primary material (metal) or its primary function (heating) earlier, which might have led to a quicker guess. However, your approach was still very effective.
+
+Overall, it was a well-played game from both sides, demonstrating good logical thinking and question formulation on your part, and consistent, fair responses from me.
+
+-------------------------------------------------
+Cross-Evaluations: Here I ask the models to evaluate the game the other model played. They were blind to the self-comments of the other models.
+
+User: evaluate this game played by another model: [transcript of game]
+
+ChatGPT:
+
+Evaluation of the Game:
+
+Claude's Performance:
+1. Choice of Item:
+   - Toaster: A toaster is a good choice, being a common household item that is not immediately obvious but not overly obscure.
+   - Guess Difficulty: The choice strikes a balance between being too easy and too hard, making the game engaging.
+
+2. Answering Questions:
+   - Clarity and Accuracy: All answers were clear, concise, and accurate. The answer to whether the item is electronic was particularly helpful in guiding the user.
+   - Detailed Responses: Claude provided detailed responses when needed, such as clarifying that the item is primarily purpose-built but can be decorative.
+
+User's Performance:
+1. Question Strategy:
+   - Logical Progression: The questions followed a logical sequence, progressively narrowing down the possibilities.
+   - Broad to Specific: The user started with broad questions and moved to more specific ones, effectively narrowing the scope.
+
+2. Effectiveness of Questions:
+   - Relevance: Each question was relevant and contributed to narrowing down the possibilities.
+   - Efficiency: The user successfully guessed the item in 14 questions, demonstrating efficient questioning.
+
+Overall Evaluation:
+- Game Flow: The game flowed smoothly with a clear progression from broad to specific questions, leading to a successful guess.
+- Engagement: The game was engaging and maintained interest throughout.
+- Outcome: The user successfully guessed the item in a reasonable number of questions, indicating a good balance of difficulty.
+
+Suggestions for Improvement:
+- Claude: Continue choosing items that are common but not too obvious, maintaining the balance between challenging and guessable. The detailed responses and willingness to clarify were particularly helpful and should be continued.
+- User: Continue using a strategic approach by asking broad questions first and then narrowing down to specifics. This method proved effective and efficient.
+
+Overall, the game was successful and enjoyable, demonstrating effective communication and problem-solving skills from both sides. Both the model and the user showed good performance in making the game engaging and completing it efficiently.
+
+Claude:
+
+Let's evaluate this game played by another model:
+
+Choice of item:
+The model chose a pen, which is a good choice for 20 Questions. It's a common item but not immediately obvious, allowing for an engaging game.
+
+Model's answers:
+The model provided clear and consistent yes/no answers throughout the game. The responses were accurate and didn't mislead the user.
+
+User's questions:
+The user's questioning strategy was effective and methodical. They started with broad categories (alive/not alive, natural/human-made) and then narrowed down systematically. Key effective questions included:
+
+1. Asking if it was electronic - this helped eliminate a large category of items.
+2. Inquiring if it was handheld - this significantly narrowed the field.
+3. Checking if it was for indoor or outdoor use - further refining the possibilities.
+4. Asking if it was for writing - this was the crucial question that led to the correct guess.
+
+Game progression:
+The user guessed the item in 11 questions, which is a very good performance. The progression from general characteristics to specific guesses was logical and efficient.
+
+Comparison to our game:
+This game was slightly shorter than ours (11 questions vs. 14), possibly because a pen is a simpler, more common item than a toaster. The questioning strategies were similar, starting with general categories and narrowing down.
+
+Areas for potential improvement:
+The user could have asked about the item's primary material earlier, which might have led to a quicker guess. However, their approach was still very effective.
+
+Overall, this was also a well-played game, demonstrating good logical thinking and question formulation by the user, and consistent, fair responses from the model.</pre>
+        </div> 
+        
+        <div class="footer">
+            <p><p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="https://oscars47.github.io/math-zombies/">AI, Math, Zombies Oh My</a> by <span property="cc:attributionName">Gizem Karaali, Kamden Baer, Oscar Scholin</span> is licensed under <a href="http://creativecommons.org/licenses/by-nc/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;color:hsl(from color h s l)">Attribution-NonCommercial 4.0 International<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"></a></p> </p>
+        </div>
+        </body>
+      </html>
