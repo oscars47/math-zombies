@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Posts</title>
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.1.2/es5/tex-mml-chtml.js">
+    </script>
+    <style>
+         body {
+            font-family: Cambria, sans-serif;
+            font-size: 16px;
+            margin: 0;
+            padding: 0;
+            /* display: flex; */
+        }
+        pre {
+          font-family: Cambria, sans-serif;
+          font-size: 16px;
+          line-height: 1.6;
+          white-space: pre-wrap;       /* CSS 3 */
+          white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+          white-space: -pre-wrap;      /* Opera 4-6 */
+          white-space: -o-pre-wrap;    /* Opera 7 */
+          word-wrap: break-word;       /* Internet Explorer 5.5+ */
+      }
+         /* Style the navigation bar */
+         nav {
+            background-color: #333;
+            overflow: hidden;
+        }
+
+        /* Navigation bar links */
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Display list items in a horizontal row */
+        nav ul li {
+            float: left;
+        }
+
+        /* Style for each link */
+        nav ul li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        /* Change color on hover */
+        nav ul li a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        /* Clear floats after the columns */
+        nav:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        /* Responsive design: Stacks the links vertically on small screens */
+        @media screen and (max-width: 600px) {
+            nav ul li {
+                float: none;
+            }
+        }
+
+        .main-content {
+            width: 75%;
+            padding: 20px;
+        }
+
+        .footer {
+        background-color: #979090;
+        color: white;
+        text-align: center;
+        padding: 20px;
+        position: relative;
+        bottom: 0;
+        width: 100%;
+        }
+.post {
+    margin-bottom: 40px;
+}
+.post img {
+    max-width: 100%;
+    height: auto;
+}
+.post fig{
+    max-width: 20%;
+    height: auto;
+}
+.post figcaption {
+    font-style: italic;
+    color: #666;
+    width: 20%;
+}
+.post h3{
+    color: #792222;
+}
+.post .caption {
+    font-style: italic;
+    color: #666;
+}
+.post-date {
+    font-size: 14px;
+    color: grey;
+}
+.post name {
+    font-size: 14px;
+    color: grey;
+}
+
+</style>
+</head>
+<body>
+    <div class="main-content">
+        <nav>
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+            <li><a href="../bio.html">Bio</a></li>
+            <li><a href="../posts.html">Posts</a></li> 
+            <li><a href="../contact.html">Contact</a></li>
+            </ul>
+        </nav>
+
+        <br>
+
+     
+        <div class="post">
+            <h3>Si monumentum requires circumspice</h3>
+            <p class = "post-name">Oscar Scholin</p>
+            <p class="post-date">July 17, 2024</p>
+
+            <p class="post img">
+                <img src="../images/DALL·E 2024-07-19 17.09.48 - An illustration of the pervasive integration of AI in daily life in 2024, with the phrase 'Si monumentum requires circumspice' prominently displayed.  - Oscar Scholin.webp" alt="image of ai intertwined">
+            </p>
+
+            <p class="caption">An illustration of the pervasive integration of AI in daily life in 2024, by Chat GPT and DALL-E.</p>
+            <pre>AI is everywhere. This week, on July 16, 2024, <a href = "https://workspaceupdates.googleblog.com/2024/07/gemini-workspace-extensions-beta.html" >Google integrated its own model Gemini into its Google workspace suite</a>. Open up Gmail, and Gemini Pro subscribers are greeted with:
+
+<blockquote>
+Hello, X
+How can I help you today?
+Show unread emails from my inbox
+Get order details for recent purchases
+Find attachments in my emails.
+</blockquote>
+
+Open up Google docs, and:
+
+<blockquote>
+Hello, X
+How can I help you today?
+Summary of this content
+Rephrase part of this document
+Refine this document
+Summarize this document in a specific format
+</blockquote>
+
+iPhone users, come mid-September of this year, iOS18 will release, and a major update is to<a href =  "https://www.forbes.com/sites/johnkoetsier/2024/06/10/apple-chatgpt-ios-18-heres-how-it-will-work/">power Siri with Chat GPT</a> for text, audio, and image analysis. Gone are the days of, “Hey Siri, play my favorite music.” “OK, I found this on the web for ‘new Taco recipes’.” While users can opt out of supercharged Siri, it is becoming increasingly difficult to avoid it: even Google search, since May 14, <a href =  "https://blog.google/products/search/generative-ai-google-search-may-2024/"> presents users with an “Experimental AI overview” of search results</a>. 
+
+But is it something to avoid? Particularly, if you are someone who feels more removed from or disinterested in the fast-paced Big Tech world, what does AI have to offer?
+
+It seems beyond evident that the primary focus of generative AI is to boost productivity. The Google workspace integration is one such example. Another important one is <a href =  "https://github.com/features/copilot">Github Copilot</a>, which claims to increase developer speed by 25%, with 55% faster coding. As an avid programmer and machine learning engineer myself, I can personally attest to Copilot—combined with Chat GPT prompts for more specialized questions requiring more logical effort—consistently reducing development time substantially by anticipating what you want to do and helping you achieve that. No, it’s not always right, and in fact many times makes mistakes due to both a misunderstanding of what you want in addition to syntax changes in the packages themselves. 
+
+That said, what Copilot and Chat GPT enable for me is to drastically reduce the time from conception of an idea to its deployment. For example, prior to developing this website last December, I had no HTML or CSS background—though I did know Java and Python. Yet in a few days I was able to develop a sophisticated multi-platform backend and customize a frontend hosted on an Amazon EC2 instance with the help of Chat GPT. It most definitely wasn’t a plug-and-play solution; there were considerable problems with the code that required a lot of active research, trial and error, and even Stack-Exchanging on my part. But, in the language of chemistry, Chat GPT dramatically reduced the energy of activation barrier to achieve my idea for how this blog would function. In other words, it is a catalyst—offering not a final product, but a route to get there. Of course, I fully expect that as the months go by, the percent reduction in energy of activation will asymptotically approach 100%, so that with a single sentence I can create a fully developed custom backend and frontend, which requires a model that fully integrates with the software on my computer so it can debug in real time. 
+
+The flexibility and adaptability of AI will profoundly change the world. As Jensen Huang said in his Caltech 2024 graduation speech,
+
+<blockquote>
+AI is the next industrial revolution. Computers today are the single most important instrument of knowledge, and it’s foundational to every single industry in every field of science… We are now in an era of accelerated computing, with computing duties offloaded to GPUs working in parallel, ushering in deep learning and other advancements.
+</blockquote>
+
+The GPU, which enables highly parallelized computation, and the rise of transfer learning are powering this new revolution. Transfer learning is the idea that there are fundamental similarities underlying data, and specialized models trained on one particular set of data can actually be harnessed by “re-training” them on new datasets. For example, <a href =  "https://arxiv.org/pdf/2310.02994">models trained on video analysis of cat videos,</a> when retrained to solve partial differential equations, performed better than models starting with random weights. One can see this intuitively in terms of preserving a sense of temporal continuity. The implications of this result are massive: we can utilize previously trained models for whatever more specialized tasks we require, which means we can spend exponentially fewer resources in training.
+
+Kamden Baer, in his article <a href =  "https://oscars47.github.io/math-zombies/post_files/kmbc2-2024-07-15T00_27_23.772Z.html
+">Efficiency: AI Implementation in Theory and in Practice,</a> addresses some key concerns in the face of these developments: 
+
+<blockquote>
+Many people have jobs that don’t need a computer, let alone AI. I think about the retail and food service employees, the cleaners, the farmers and farm hands, the construction workers and the mail carriers. None of these careers benefit greatly from improvements in efficiency due to AI, as opposed to more traditional office jobs, but they still provide valuable and irreplaceable services and make a living for the people that work them. AI might lead to more efficiency and leisure time for people who benefit most from the product, but I don’t foresee them taking up the labor of those less advantaged by AI. Where there is efficiency, there is not necessarily equity, and so this unevenness of AI implementation could detract from its power. 
+</blockquote>
+
+Kamden’s concern over equity that may be lost in the midst of this drive for efficiency is spot on: access to the most advanced models requires paying a monthly subscription fee. That said, Chat GPT, Claude, and Gemini offer free versions—which, while they may not be as astute as their paywalled compatriots, still offer themselves as catalysts for development. As an example, programming no longer has such a steep learning curve. Anyone can program with the aid of generative AI. This will help lessen the digital divide. However, this underscores the relevance of open source code and models—like the libraries PyTorch, Tensorflow, Keras—for enabling people outside of the Tech giants to innovate.
+
+Breaking the barrier to coding is essential, as contrary to Kamden’s statement about retailers, food servers, farmers, and postworkers, AI is rapidly changing these fields. For instance, retailers like <a href =  "https://corporate.target.com/news-features/article/2023/12/artificial-intelligence">Target</a> and <a href = "https://tech.walmart.com/content/walmart-global-tech/en_us/blog/post/walmarts-ai-powered-inventory-system-brightens-the-holidays.html" >Walmart</a>use AI for inventory management and supply chain optimization. AI systems help in tracking stock levels, forecasting demand, and even guiding staff on restocking shelves more efficiently. In food service, chains like <a href = "https://www.qsrmagazine.com/operations/drive-thru/carls-jr-hardees-join-ai-drive-thru-revolution/">Carl's Jr. and Hardee's</a> have implemented AI for drive-thru ordering, improving order accuracy and speed while allowing employees to focus on other tasks. 
+
+Moreover, AI is revolutionizing farming through precision agriculture techniques. <a href =  "https://www.datasciencesociety.net/ai-in-agriculture-how-crop-monitoring-and-precision-farming-are-changing-the-industry/">
+AI-powered drones and sensors</a> are used for monitoring crop health, soil conditions, and irrigation needs. <a href =  "https://www.bearflagrobotics.com/autonomous-farm-tractors/"> Autonomous tractors and harvesters</a> also perform tasks such as planting and harvesting.
+
+AI is also improving logistics and delivery efficiency. For example, the <a href =  "https://www.rocsoft.com/blogs/in-plant-insights/how-ai-is-changing-mail-production-services/"> the United States Postal Service uses AI for route optimization and sorting mail</a>, which helps mail carriers deliver more efficiently. Additionally, <a href =  "https://www.nature.com/articles/s41598-023-45371-1">autonomous delivery robots and drones</a> are being tested for package delivery, potentially reducing the workload on human mail carriers. 
+
+Sure, a skeptical reader might say, but these advancements only apply to more industrial scale tasks. How can AI compete with my own logical thinking? This is exactly what Go world champion Lee Saedol thought, <a href =  "https://www.nytimes.com/2024/07/10/world/asia/lee-saedol-go-ai.html?smid=nytcore-ios-share&referringSource=articleShare&sgrp=c-cb">until he lost to AlphaGo in 2016</a>. “I couldn’t get used to it,” he said. “I thought that A.I. would beat humans someday. I just didn’t think it was here yet.” What Saedol fears is that people’s creativity and originality will wane as AI use increases—sentiment shared by Kamden in his latest article <a href =  "https://oscars47.github.io/math-zombies/post_files/kmbc2-2024-07-19T21_08_08.861Z.html">
+Generative AI: Make Me Hate It!</a> in which he describes AI algorithms as “compil[ing] what is already known and repackag[ing] it as new”, and by Gizem Karaali in her article <a href =  "https://oscars47.github.io/math-zombies/post_files/gizem-2024-07-17T06_00_23.355Z.html">On First Drafts</a>, in which she describes the act of writing the first draft as one of exercising thought itself and wonders whether using AI for writing will bypass that process.
+
+Fundamentally, AI is built to generalize. It captures relationships researchers never intended, and can adapt to any problem—of course with non-uniform results, which is the focus of creating more powerful, unified frameworks. Its ability to construct logical arguments and deduce is improving. It is able to suggest new ideas and examine hypotheses. 
+
+I believe everyone has a moral imperative to learn about AI to prevent moment’s like Saedol’s when he confronted AlphaGo without knowing its capabilities and limitations. As he says ominously, “It may not be a happy ending.” Public engagement with AI will not only help to break the digital divide, but also create a more robust user base that can resist complete monopolization by companies like OpenAI or Google.
+
+Learning about AI is essential not only to stave off the doom and gloom, but because I think it can enable people to realize how they can use AI to improve their lives. I would say that there isn’t a task in one’s life that AI can’t help with—even as emotional support. People make the mistake though of assuming that letting AI into one’s life means replacing a part of it with AI. The use of AI isn’t a mutually exclusive choice. 
+
+AI is competition in some sense, however, because it will certainly replace some jobs, and OpenAI’s CEO Mira Murati has made some 
+ <a href =  "https://dorve.com/blog/ux-news-articles-archive/openai-cto-ai-kill-jobs/">controversial remarks in this regard</a>. But there is also an explosion of new jobs in the AI sector: over <a href =  "https://edisonandblack.com/pages/over-97-million-jobs-set-to-be-created-by-ai.html">97 million new jobs related to AI</a> expected to be added by 2025. 
+
+Furthermore, I don’t think AI is replacing thinking—it’s just changing the mode of thinking. It is reorienting the focus of our thoughts to be on higher level questions and goals. We can focus our creative energy on bigger picture questions, which exponentially expands the scope of what’s possible—and that to me is beautiful. We can play in a logical playground instead of toiling against steep learning curves; we are limited only by our imagination. We still need to learn to think for ourselves, however, in order to be an effective validator and user of the technology. 
+
+AI is here to stay, and it will only become more intertwined in our lives. By embracing it, we can adapt to the new world that’s coming and ultimately continue the advancements of modern times by improving our lives, protecting the planet, and discovering new knowledge. But if we as a people remain largely ignorant or agnostic to it, then the outcome may not be so friendly.
+
+In particular, I see 5 main concrete goals, compiled with the help of Claude, to achieve a relatively seamless transition to the AI dominated world:
+
+1. Ensuring equitable access to AI technologies across different sectors and regions to prevent the exacerbation of existing inequalities.
+
+2. Encouraging diversity in AI development and applications to counter the trend of market consolidation by tech giants.
+
+3. Maintaining a focus on human learning and critical thinking skills, even as we increasingly rely on AI for certain cognitive tasks.
+
+4. Fostering a culture that continues to value human creativity, originality, and innovation alongside AI-driven efficiency.
+
+5. Developing ethical frameworks and regulations to guide the development and deployment of AI technologies.
+
+In the end, it is as in Sir Christopher Wren’s epitaph: “Si monumentum requires circumspice.” “If you seek his monument, look around you.” Look around, look within. We are the testament to what will happen next.</pre>
+        </div> 
+        
+        <div class="footer">
+            <p><p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="https://oscars47.github.io/math-zombies/">AI, Math, Zombies Oh My</a> by <span property="cc:attributionName">Gizem Karaali, Kamden Baer, Oscar Scholin</span> is licensed under <a href="http://creativecommons.org/licenses/by-nc/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;color:hsl(from color h s l)">Attribution-NonCommercial 4.0 International<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"></a></p> </p>
+        </div>
+        </body>
+      </html>
